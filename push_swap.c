@@ -6,7 +6,7 @@
 /*   By: agelloz <agelloz@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/19 11:33:53 by agelloz           #+#    #+#             */
-/*   Updated: 2019/07/23 12:15:29 by agelloz          ###   ########.fr       */
+/*   Updated: 2019/07/23 18:10:22 by agelloz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,7 +120,6 @@ int		ft_fill_a(t_stack **a, int ac, char **av)
 			return (0);
 		}
 	}
-	printf("Filled.\n");
 	return (1);
 }
 
@@ -191,29 +190,61 @@ void	ft_display_stacks(t_stack *a, t_stack *b)
 	t_number	*curr;
 
 	curr = a->first;
-	ft_putstr("Stack a: ");
+	ft_putstr("Stack a");
+	ft_putchar('|');
 	while (curr)
 	{
-		ft_putnbr(curr->n);
 		ft_putchar(' ');
+		ft_putnbr(curr->n);
 		curr = curr->next;
 	}
-	ft_putchar('\n');
-
+	ft_putchar('|');
+	//ft_putchar('\n');
 	curr = (b->first) ? b->first : NULL;
-	ft_putstr("Stack b: ");
+	ft_putstr(" Stack b");
+	ft_putchar('|');
 	while (curr)
 	{
-		ft_putnbr(curr->n);
 		ft_putchar(' ');
+		ft_putnbr(curr->n);
 		curr = curr->next;
 	}
+	ft_putchar('|');
 	ft_putchar('\n');
 }
 
-void	ft_sort_1(t_stack **s1, t_stack **s2)
+void	ft_sort_1(t_stack **a, t_stack **b)
 {
+	t_number	*curr;
+	t_number	*smallest;
 
+	while ((**a).first->next)
+	{
+		curr = (**a).first;
+		smallest = curr;
+		while (curr)
+		{
+			if (curr->n < smallest->n)
+				smallest = curr;
+			curr = curr->next;
+		}
+		curr = (**a).first;
+		while ((**a).first != smallest)
+		{
+			ft_putstr("ra\n");
+			*a = ft_rotate(a);
+			ft_display_stacks(*a, *b);
+		}
+		ft_putstr("pb\n");
+		*b = ft_push(b, a);
+		ft_display_stacks(*a, *b);
+	}
+	while ((**b).first)
+	{
+		ft_putstr("pa\n");
+		*a = ft_push(a, b);
+		ft_display_stacks(*a, *b);
+	}
 }
 
 int		main(int ac, char **av)
@@ -229,15 +260,6 @@ int		main(int ac, char **av)
 	b->first = NULL;
 	if (ac < 2 || !ft_fill_a(&a, ac, av))
 		return (0);
-
-	//Tests
-	//a = ft_swap(&a);
-	//a = ft_rotate(&a);
-	//a = ft_reverse_rotate(&a);
-	//b = ft_push(&b, &a);
-	//b = ft_push(&b, &a);
-	//b = ft_push(&a, &b);
-	//b = ft_rotate(&b);
 
 	ft_sort_1(&a, &b);
 	ft_display_stacks(a, b);
