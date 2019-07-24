@@ -6,7 +6,7 @@
 #    By: agelloz <agelloz@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/07/19 11:32:25 by agelloz           #+#    #+#              #
-#    Updated: 2019/07/22 15:40:22 by agelloz          ###   ########.fr        #
+#    Updated: 2019/07/24 18:02:40 by agelloz          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,8 +19,8 @@ FLAGS = -Wall -Wextra
 LIBH = libft/includes
 LIBA = libft/libft.a
 
-SRC1 = checker.c
-SRC2 = push_swap.c
+SRC1 = checker.c functions.c get_next_line.c
+SRC2 = push_swap.c functions.c selection_sort.c
 OBJ1 = $(SRC1:%.c=%.o)
 OBJ2 = $(SRC2:%.c=%.o)
 

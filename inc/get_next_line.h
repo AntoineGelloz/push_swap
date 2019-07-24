@@ -1,18 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   checker.h                                          :+:      :+:    :+:   */
+/*   get_next_line.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: agelloz <agelloz@student.42.fr>            +#+  +:+       +#+        */
+/*   By: agelloz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/07/19 11:37:42 by agelloz           #+#    #+#             */
-/*   Updated: 2019/07/19 11:37:47 by agelloz          ###   ########.fr       */
+/*   Created: 2019/04/11 12:05:07 by agelloz           #+#    #+#             */
+/*   Updated: 2019/05/07 16:17:26 by agelloz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CHECKER_H
-# define CHECKER_H
+#ifndef GET_NEXT_LINE_H
+# define GET_NEXT_LINE_H
 
-# include <stdio.h>
+# define BUFF_SIZE 5000
+
+int get_next_line(const int fd, char **line);
 
 #endif
