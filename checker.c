@@ -6,14 +6,14 @@
 /*   By: agelloz <agelloz@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/19 11:33:53 by agelloz           #+#    #+#             */
-/*   Updated: 2019/07/24 14:51:08 by agelloz          ###   ########.fr       */
+/*   Updated: 2019/07/25 16:58:07 by agelloz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 #include "get_next_line.h"
 
-int		ft_check(t_stack *a, t_stack *b)
+int	ft_check_stacks(t_stack *a, t_stack *b)
 {
 	t_number	*curr;
 
@@ -29,68 +29,69 @@ int		ft_check(t_stack *a, t_stack *b)
 	return (1);
 }
 
-int		main(int ac, char **av)
+int	ft_check_line(char *line)
 {
-	t_stack		*a;
-	t_stack		*b;
-	char 		*line;
+	if (line[0] == '\0')
+		return (0);
+	else if (ft_strcmp(line, "sa") && ft_strcmp(line, "sb")
+			&& ft_strcmp(line, "ss") && ft_strcmp(line, "pa")
+			&& ft_strcmp(line, "pb") && ft_strcmp(line, "ra")
+			&& ft_strcmp(line, "rb") && ft_strcmp(line, "rr")
+			&& ft_strcmp(line, "rra") && ft_strcmp(line, "rrb")
+			&& ft_strcmp(line, "rrr"))
+	{
+		ft_putstr("Error\n");
+		return (0);
+	}
+	return (1);
+}
 
-	if (!(a = malloc(sizeof(*a))) || !(b = malloc(sizeof(*b))))
+int	ft_check_instruction(char *line, t_stack **a, t_stack **b)
+{
+	if (!ft_check_line(line))
+		return (0);
+	(!ft_strcmp(line, "sa")) ? ft_swap(a) : 0;
+	(!ft_strcmp(line, "sb")) ? ft_swap(b) : 0;
+	(!ft_strcmp(line, "ss")) ? ft_rotate(a) : 0;
+	(!ft_strcmp(line, "ss")) ? ft_rotate(b) : 0;
+	(!ft_strcmp(line, "pa")) ? ft_push(b, a) : 0;
+	(!ft_strcmp(line, "pb")) ? ft_push(a, b) : 0;
+	(!ft_strcmp(line, "ra")) ? ft_rotate(a) : 0;
+	(!ft_strcmp(line, "rb")) ? ft_rotate(b) : 0;
+	(!ft_strcmp(line, "rr")) ? ft_rotate(a) : 0;
+	(!ft_strcmp(line, "rr")) ? ft_rotate(b) : 0;
+	(!ft_strcmp(line, "rra")) ? ft_reverse_rotate(a) : 0;
+	(!ft_strcmp(line, "rrb")) ? ft_reverse_rotate(b) : 0;
+	(!ft_strcmp(line, "rrr")) ? ft_reverse_rotate(a) : 0;
+	(!ft_strcmp(line, "rrr")) ? ft_reverse_rotate(b) : 0;
+	return (1);
+}
+
+int	main(int ac, char **av)
+{
+	t_stack	*a;
+	t_stack	*b;
+	char	*line;
+
+	if (!(a = malloc(sizeof(*a)))
+			|| !(b = malloc(sizeof(*b))))
 		return (0);
 	a->first = NULL;
 	b->first = NULL;
 	line = NULL;
 	if (ac < 2 || !ft_fill_a(&a, ac, av))
 		return (0);
-	ft_display_stacks(a, b);
-	ft_putchar('\n');
 	while (get_next_line(0, &line) > 0)
 	{
-		if (ft_strcmp(line, "sa") == 0)
-			ft_swap(&a);
-		else if (ft_strcmp(line, "sb") == 0)
-			ft_swap(&b);
-		else if (ft_strcmp(line, "ss") == 0)
-		{
-			ft_rotate(&a);
-			ft_rotate(&b);
-		}
-		else if (ft_strcmp(line, "pa") == 0)
-			ft_push(&a, &b);
-		else if (ft_strcmp(line, "pb") == 0)
-			ft_push(&b, &a);
-		else if (ft_strcmp(line, "ra") == 0)
-			ft_rotate(&a);
-		else if (ft_strcmp(line, "rb") == 0)
-			ft_rotate(&b);
-		else if (ft_strcmp(line, "rr") == 0)
-		{
-			ft_rotate(&a);
-			ft_rotate(&b);
-		}
-		else if (ft_strcmp(line, "rra") == 0)
-			ft_reverse_rotate(&a);
-		else if (ft_strcmp(line, "rrb") == 0)
-			ft_reverse_rotate(&a);
-		else if (ft_strcmp(line, "rrr") == 0)
-		{
-			ft_reverse_rotate(&a);
-			ft_reverse_rotate(&b);
-		}
-		else if (line[0] == '\0')
+		if (!ft_check_instruction(line, &a, &b))
 			break ;
-		else
-		{
-			ft_putstr("Error\n.");
-			break ;
-		}
+		ft_strdel(&line);
 	}
 	ft_strdel(&line);
-	if (ft_check(a, b))
+	if (ft_check_stacks(a, b))
 		ft_putstr("OK\n");
 	else
 		ft_putstr("KO\n");
-	ft_display_stacks(a, b);
 	ft_delete_stacks(a, b);
 	return (0);
 }

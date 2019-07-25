@@ -6,7 +6,7 @@
 /*   By: agelloz <agelloz@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/19 11:37:42 by agelloz           #+#    #+#             */
-/*   Updated: 2019/07/24 17:36:36 by agelloz          ###   ########.fr       */
+/*   Updated: 2019/07/25 17:14:37 by agelloz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,5 +38,6 @@ t_stack	*ft_rotate(t_stack **s);
 t_stack *ft_reverse_rotate(t_stack **s);
 t_stack *ft_push(t_stack **s1, t_stack **s2);
 void	ft_selection_sort(t_stack **a, t_stack **b, int n);
+void	ft_insertion_sort(t_stack **a, t_stack **b, int elements);
 
 #endif

@@ -6,33 +6,77 @@
 /*   By: agelloz <agelloz@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/19 11:33:53 by agelloz           #+#    #+#             */
-/*   Updated: 2019/07/24 17:59:12 by agelloz          ###   ########.fr       */
+/*   Updated: 2019/07/25 18:51:13 by agelloz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	ft_insertion_sort(t_stack **a, t_stack **b, int elements)
+int		ft_is_sorted(t_stack *a)
 {
-	int			sorted;
-	int			unsorted;
 	t_number	*curr;
 
-	sorted = 0;
-	curr = (**a).first;
-	while (curr->next && curr->n < curr->next->n && sorted < elements)
+	curr = a->first;
+	while (curr->next)
 	{
-		printf("n:%d, next:%d\n", curr->n, curr->next->n);
-		sorted++;
+		if (curr->n > curr->next->n)
+			break ;
 		curr = curr->next;
 	}
-	unsorted = elements - sorted;
-	printf("el:%d, unsorted:%d\n", elements, unsorted);
-	while (sorted && unsorted--)
+	if (!curr->next)
+		return (1);
+	return (0);
+}
+
+void	ft_three_numbers2(t_stack **a)
+{
+	t_number	*curr;
+
+	curr = (**a).first;
+	if (curr->next->n > curr->next->next->n)
 	{
-		ft_putstr("rra\n");
-		*a = ft_reverse_rotate(a);
+		ft_swap(a);
+		ft_reverse_rotate(a);
+		ft_putstr("sa\nrra\n");
 	}
+	else
+	{
+		if ((**a).first->n < (**a).first->next->next->n)
+		{
+			ft_swap(a);
+			ft_putstr("sa\n");
+		}
+		else
+		{
+			ft_rotate(a);
+			ft_putstr("ra\n");
+		}
+	}
+}
+
+void	ft_three_numbers(t_stack **a)
+{
+	t_number	*curr;
+
+	curr = (**a).first;
+	if (curr->n > curr->next->n)
+		ft_three_numbers2(a);
+	else if (curr->n < curr->next->n)
+	{
+		ft_reverse_rotate(a);
+		ft_putstr("rra\n");
+		if ((**a).first->n > (**a).first->next->n)
+		{
+			ft_swap(a);
+			ft_putstr("sa\n");
+		}
+	}
+}
+
+int		ft_exit(t_stack *a, t_stack *b)
+{
+	ft_delete_stacks(a, b);
+	return (0);
 }
 
 int		main(int ac, char **av)
@@ -40,15 +84,17 @@ int		main(int ac, char **av)
 	t_stack		*a;
 	t_stack		*b;
 
-	if (!(a = malloc(sizeof(*a))) || !(b = malloc(sizeof(*b))))
-		return (0);
+	b = NULL;
+	if (!(a = malloc(sizeof(*a)))
+			|| !(b = malloc(sizeof(*b))))
+		return (ft_exit(a, b));
 	a->first = NULL;
 	b->first = NULL;
-	if (ac < 2 || !ft_fill_a(&a, ac, av))
-		return (0);
-	ft_insertion_sort(&a, &b, ac - 1);
-	ft_display_stacks(a, b);
-	//ft_selection_sort(&a, &b, ac);
-	ft_delete_stacks(a, b);
-	return (0);
+	if (ac < 2 || !ft_fill_a(&a, ac, av) || ft_is_sorted(a))
+		return (ft_exit(a, b));
+	if (ac == 4)
+		ft_three_numbers(&a);
+	else
+		ft_insertion_sort(&a, &b, ac - 1);
+	return (ft_exit(a, b));
 }
