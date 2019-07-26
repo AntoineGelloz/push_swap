@@ -6,13 +6,13 @@
 /*   By: agelloz <agelloz@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/19 11:33:53 by agelloz           #+#    #+#             */
-/*   Updated: 2019/07/25 17:58:06 by agelloz          ###   ########.fr       */
+/*   Updated: 2019/07/26 19:29:38 by agelloz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-t_stack	*ft_swap(t_stack **s)
+void	ft_swap(t_stack **s)
 {
 	t_number	*one;
 	t_number	*two;
@@ -25,10 +25,9 @@ t_stack	*ft_swap(t_stack **s)
 		two->next = one;
 		(**s).first = two;
 	}
-	return (*s);
 }
 
-t_stack	*ft_rotate(t_stack **s)
+void	ft_rotate(t_stack **s)
 {
 	t_number	*one;
 	t_number	*curr;
@@ -40,10 +39,9 @@ t_stack	*ft_rotate(t_stack **s)
 	((**s).first->next) ? (**s).first = (**s).first->next : 0;
 	curr->next = one;	
 	curr->next->next = NULL;
-	return (*s);
 }
 
-t_stack	*ft_reverse_rotate(t_stack **s)
+void	ft_reverse_rotate(t_stack **s)
 {
 	t_number	*one;
 	t_number	*curr;
@@ -55,10 +53,9 @@ t_stack	*ft_reverse_rotate(t_stack **s)
 	(**s).first = curr->next;
 	curr->next->next = one;
 	curr->next = NULL;
-	return (*s);
 }
 
-t_stack	*ft_push(t_stack **s1, t_stack **s2)
+void	ft_push(t_stack **s1, t_stack **s2)
 {
 	t_number	*one;
 	t_number	*pushed;
@@ -71,5 +68,4 @@ t_stack	*ft_push(t_stack **s1, t_stack **s2)
 		(**s1).first = pushed->next;
 		pushed->next = one;
 	}
-	return (*s2);
 }

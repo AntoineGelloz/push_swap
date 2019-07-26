@@ -6,7 +6,7 @@
 /*   By: agelloz <agelloz@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/19 11:33:53 by agelloz           #+#    #+#             */
-/*   Updated: 2019/07/25 17:23:59 by agelloz          ###   ########.fr       */
+/*   Updated: 2019/07/26 19:30:15 by agelloz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,20 +48,20 @@ void	ft_selection_sort(t_stack **a, t_stack **b, int n)
 			if (pos < n / 2)
 			{
 				ft_putstr("ra\n");
-				*a = ft_rotate(a);
+				ft_rotate(a);
 			}
 			else
 			{	
 				ft_putstr("rra\n");
-				*a = ft_reverse_rotate(a);
+				ft_reverse_rotate(a);
 			}
 		}
 		ft_putstr("pb\n");
-		*b = ft_push(a, b);
+		ft_push(a, b);
 	}
 	while ((**b).first)
 	{
 		ft_putstr("pa\n");
-		*a = ft_push(b, a);
+		ft_push(b, a);
 	}
 }
