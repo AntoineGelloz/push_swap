@@ -14,7 +14,7 @@
 
 int		ft_is_sorted(t_stack *a)
 {
-	t_number	*curr;
+	t_list	*curr;
 
 	curr = a->first;
 	while (curr->next)
@@ -30,7 +30,7 @@ int		ft_is_sorted(t_stack *a)
 
 void	ft_three_numbers2(t_stack **a)
 {
-	t_number	*curr;
+	t_list	*curr;
 
 	curr = (**a).first;
 	if (curr->next->n > curr->next->next->n)
@@ -49,7 +49,7 @@ void	ft_three_numbers2(t_stack **a)
 
 void	ft_three_numbers(t_stack **a)
 {
-	t_number	*curr;
+	t_list	*curr;
 
 	curr = (**a).first;
 	if (curr->n > curr->next->n)

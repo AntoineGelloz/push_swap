@@ -14,7 +14,7 @@
 
 void	ft_display_stacks(t_stack *a, t_stack *b)
 {
-	t_number	*curr;
+	t_list	*curr;
 
 	curr = a->first;
 	ft_putstr("a");

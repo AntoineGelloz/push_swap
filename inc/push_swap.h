@@ -16,17 +16,11 @@
 # include <stdio.h>
 # include "libft.h"
 
-typedef	struct	s_number
-{
-	int				n;
-	int				index;
-	struct s_number	*next;
-
-}				t_number;
-
 typedef struct	s_stack
 {
-	t_number	*first;
+	char	name;
+	int	len;
+	t_list	*head;
 }				t_stack;
 
 int		ft_check_n(char **av, int i);
