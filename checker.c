@@ -6,7 +6,7 @@
 /*   By: agelloz <agelloz@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/19 11:33:53 by agelloz           #+#    #+#             */
-/*   Updated: 2019/07/25 16:58:07 by agelloz          ###   ########.fr       */
+/*   Updated: 2019/07/29 12:38:30 by agelloz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,20 +50,27 @@ int	ft_check_instruction(char *line, t_stack **a, t_stack **b)
 {
 	if (!ft_check_line(line))
 		return (0);
-	(!ft_strcmp(line, "sa")) ? ft_swap(a) : 0;
-	(!ft_strcmp(line, "sb")) ? ft_swap(b) : 0;
-	(!ft_strcmp(line, "ss")) ? ft_rotate(a) : 0;
-	(!ft_strcmp(line, "ss")) ? ft_rotate(b) : 0;
-	(!ft_strcmp(line, "pa")) ? ft_push(b, a) : 0;
-	(!ft_strcmp(line, "pb")) ? ft_push(a, b) : 0;
-	(!ft_strcmp(line, "ra")) ? ft_rotate(a) : 0;
-	(!ft_strcmp(line, "rb")) ? ft_rotate(b) : 0;
-	(!ft_strcmp(line, "rr")) ? ft_rotate(a) : 0;
-	(!ft_strcmp(line, "rr")) ? ft_rotate(b) : 0;
-	(!ft_strcmp(line, "rra")) ? ft_reverse_rotate(a) : 0;
-	(!ft_strcmp(line, "rrb")) ? ft_reverse_rotate(b) : 0;
-	(!ft_strcmp(line, "rrr")) ? ft_reverse_rotate(a) : 0;
-	(!ft_strcmp(line, "rrr")) ? ft_reverse_rotate(b) : 0;
+	//printf("Avant:%s\n", line);
+	//ft_display_stacks(*a, *b);
+	//ft_putchar('\n');
+	(!ft_strcmp(line, "sa")) ? ft_swap(a, 'a', 0) : 0;
+	(!ft_strcmp(line, "sb")) ? ft_swap(b, 'b', 0) : 0;
+	(!ft_strcmp(line, "ss")) ? ft_rotate(a, 'a', 0) : 0;
+	(!ft_strcmp(line, "ss")) ? ft_rotate(b, 'b', 0) : 0;
+	(!ft_strcmp(line, "pa")) ? ft_push(b, a, 'a', 0) : 0;
+	(!ft_strcmp(line, "pb")) ? ft_push(a, b, 'b', 0) : 0;
+	(!ft_strcmp(line, "ra")) ? ft_rotate(a, 'a', 0) : 0;
+	(!ft_strcmp(line, "rb")) ? ft_rotate(b, 'b', 0) : 0;
+	(!ft_strcmp(line, "rr")) ? ft_rotate(a,'a', 0) : 0;
+	(!ft_strcmp(line, "rr")) ? ft_rotate(b, 'b', 0) : 0;
+	(!ft_strcmp(line, "rra")) ? ft_reverse_rotate(a, 'a', 0) : 0;
+	(!ft_strcmp(line, "rrb")) ? ft_reverse_rotate(b, 'b', 0) : 0;
+	(!ft_strcmp(line, "rrr")) ? ft_reverse_rotate(a, 'a', 0) : 0;
+	(!ft_strcmp(line, "rrr")) ? ft_reverse_rotate(b, 'b', 0) : 0;
+	//sleep(1);
+	//printf("Success:%s\n", line);
+	//ft_display_stacks(*a, *b);
+	//ft_putchar('\n');
 	return (1);
 }
 
@@ -92,6 +99,7 @@ int	main(int ac, char **av)
 		ft_putstr("OK\n");
 	else
 		ft_putstr("KO\n");
+	ft_display_stacks(a, b);
 	ft_delete_stacks(a, b);
 	return (0);
 }

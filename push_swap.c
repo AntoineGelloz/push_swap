@@ -6,7 +6,7 @@
 /*   By: agelloz <agelloz@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/19 11:33:53 by agelloz           #+#    #+#             */
-/*   Updated: 2019/07/25 18:51:13 by agelloz          ###   ########.fr       */
+/*   Updated: 2019/07/30 13:02:59 by agelloz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,22 +35,15 @@ void	ft_three_numbers2(t_stack **a)
 	curr = (**a).first;
 	if (curr->next->n > curr->next->next->n)
 	{
-		ft_swap(a);
-		ft_reverse_rotate(a);
-		ft_putstr("sa\nrra\n");
+		ft_swap(a, 'a', 1);
+		ft_reverse_rotate(a, 'a', 1);
 	}
 	else
 	{
 		if ((**a).first->n < (**a).first->next->next->n)
-		{
-			ft_swap(a);
-			ft_putstr("sa\n");
-		}
+			ft_swap(a, 'a', 1);
 		else
-		{
-			ft_rotate(a);
-			ft_putstr("ra\n");
-		}
+			ft_rotate(a, 'a', 1);
 	}
 }
 
@@ -63,13 +56,9 @@ void	ft_three_numbers(t_stack **a)
 		ft_three_numbers2(a);
 	else if (curr->n < curr->next->n)
 	{
-		ft_reverse_rotate(a);
-		ft_putstr("rra\n");
+		ft_reverse_rotate(a, 'a', 1);
 		if ((**a).first->n > (**a).first->next->n)
-		{
-			ft_swap(a);
-			ft_putstr("sa\n");
-		}
+			ft_swap(a, 'a', 1);
 	}
 }
 
@@ -95,6 +84,6 @@ int		main(int ac, char **av)
 	if (ac == 4)
 		ft_three_numbers(&a);
 	else
-		ft_insertion_sort(&a, &b, ac - 1);
+		ft_quicksort(&a, &b, ac - 1);
 	return (ft_exit(a, b));
 }

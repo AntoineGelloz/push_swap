@@ -6,7 +6,7 @@
 /*   By: agelloz <agelloz@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/19 11:33:53 by agelloz           #+#    #+#             */
-/*   Updated: 2019/07/25 18:18:47 by agelloz          ###   ########.fr       */
+/*   Updated: 2019/07/29 16:37:37 by agelloz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,6 +99,7 @@ int		ft_fill_a(t_stack **a, int ac, char **av)
 				return (0);
 			(i != 1) ? prev->next = curr : 0;
 			curr->n = ft_atoi(av[i]);
+			curr->index = i - 1;
 			curr->next = NULL;
 			(i == 1) ? (**a).first = curr : 0;
 			prev = curr;

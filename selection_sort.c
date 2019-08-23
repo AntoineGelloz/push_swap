@@ -6,7 +6,7 @@
 /*   By: agelloz <agelloz@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/19 11:33:53 by agelloz           #+#    #+#             */
-/*   Updated: 2019/07/26 19:30:15 by agelloz          ###   ########.fr       */
+/*   Updated: 2019/07/27 17:30:56 by agelloz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 
 #include "push_swap.h"
 
-void	ft_selection_sort(t_stack **a, t_stack **b, int n)
+void	ft_selection_sort(t_stack **a, t_stack **b, int elements)
 {
 	t_number	*curr;
 	t_number	*smallest;
@@ -45,23 +45,13 @@ void	ft_selection_sort(t_stack **a, t_stack **b, int n)
 		curr = (**a).first;
 		while ((**a).first != smallest)
 		{
-			if (pos < n / 2)
-			{
-				ft_putstr("ra\n");
-				ft_rotate(a);
-			}
+			if (pos < elements / 2)
+				ft_rotate(a, 'a', 1);
 			else
-			{	
-				ft_putstr("rra\n");
-				ft_reverse_rotate(a);
-			}
+				ft_reverse_rotate(a, 'a', 1);
 		}
-		ft_putstr("pb\n");
-		ft_push(a, b);
+		ft_push(a, b, 'b', 1);
 	}
 	while ((**b).first)
-	{
-		ft_putstr("pa\n");
-		ft_push(b, a);
-	}
+		ft_push(b, a, 'a', 1);
 }
