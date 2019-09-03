@@ -6,25 +6,24 @@
 /*   By: agelloz <agelloz@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/19 11:33:53 by agelloz           #+#    #+#             */
-/*   Updated: 2019/07/29 12:38:30 by agelloz          ###   ########.fr       */
+/*   Updated: 2019/09/03 16:39:00 by agelloz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-#include "get_next_line.h"
 
 int	ft_check_stacks(t_stack *a, t_stack *b)
 {
-	t_number	*curr;
+	t_list	*curr;
 
-	curr = a->first;
+	curr = a->head;
 	while (curr->next)
 	{
-		if (curr->n > curr->next->n)
+		if (curr->content_size > curr->next->content_size)
 			return (0);
 		curr = curr->next;
 	}
-	if (b->first)
+	if (b->head)
 		return (0);
 	return (1);
 }
@@ -83,8 +82,8 @@ int	main(int ac, char **av)
 	if (!(a = malloc(sizeof(*a)))
 			|| !(b = malloc(sizeof(*b))))
 		return (0);
-	a->first = NULL;
-	b->first = NULL;
+	a->head = NULL;
+	b->head = NULL;
 	line = NULL;
 	if (ac < 2 || !ft_fill_a(&a, ac, av))
 		return (0);

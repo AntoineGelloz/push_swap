@@ -6,7 +6,7 @@
 /*   By: agelloz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/02 17:55:27 by agelloz           #+#    #+#             */
-/*   Updated: 2019/05/07 15:43:20 by agelloz          ###   ########.fr       */
+/*   Updated: 2019/09/03 17:05:49 by agelloz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@
 # include <stdlib.h>
 # include <string.h>
 # include <unistd.h>
+
+# define BUFF_SIZE 5000
 
 void				*ft_memset(void *b, int c, size_t len);
 void				ft_bzero(void *s, size_t n);
@@ -87,5 +89,11 @@ void				ft_lstdel(t_list **alst, void (*del)(void *, size_t));
 void				ft_lstadd(t_list **alst, t_list *new);
 void				ft_lstiter(t_list *lst, void (*f)(t_list *elem));
 t_list				*ft_lstmap(t_list *lst, t_list *(*f)(t_list *elem));
+t_list				*ft_lstncpy(t_list *source, int size, int (*cpy)(void *, void *));
+int					ft_lstcount(t_list *lst);
+void				ft_lst_mergesort(t_list **source, int (*cmp)(void *, void *));
+void				ft_lstrev(t_list **alst);
+
+int					get_next_line(const int fd, char **line);
 
 #endif

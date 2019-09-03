@@ -6,7 +6,7 @@
 #    By: agelloz <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/04/02 11:12:29 by agelloz           #+#    #+#              #
-#    Updated: 2019/05/08 17:07:09 by agelloz          ###   ########.fr        #
+#    Updated: 2019/09/03 14:20:23 by agelloz          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,7 +25,8 @@ ft_tolower.c ft_isalpha.c ft_lstdelone.c ft_memcmp.c ft_putendl.c ft_strchr.c \
 ft_strequ.c ft_strmap.c ft_strnstr.c ft_toupper.c ft_isascii.c ft_lstiter.c \
 ft_memcpy.c ft_putendl_fd.c ft_strclr.c ft_striter.c ft_strmapi.c \
 ft_strrchr.c ft_isdigit.c ft_lstmap.c ft_memdel.c ft_putnbr.c ft_strcmp.c \
-ft_striteri.c ft_strncat.c ft_strsplit.c
+ft_striteri.c ft_strncat.c ft_strsplit.c get_next_line.c ft_lstncpy.c \
+ft_lst_mergesort.c ft_lstcount.c
 
 OBJ = $(SRC:%.c=%.o)
 

@@ -6,7 +6,7 @@
 /*   By: agelloz <agelloz@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/19 11:33:53 by agelloz           #+#    #+#             */
-/*   Updated: 2019/07/25 18:06:36 by agelloz          ###   ########.fr       */
+/*   Updated: 2019/09/03 16:51:32 by agelloz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,25 +16,25 @@ void	ft_display_stacks(t_stack *a, t_stack *b)
 {
 	t_list	*curr;
 
-	curr = a->first;
+	curr = a->head;
 	ft_putstr("a");
 	ft_putchar('|');
 	while (curr)
 	{
-		if (curr != a->first)
+		if (curr != a->head)
 			ft_putchar(' ');
-		ft_putnbr(curr->n);
+		ft_putnbr(curr->content_size);
 		curr = curr->next;
 	}
 	ft_putchar('|');
-	curr = (b->first) ? b->first : NULL;
+	curr = (b->head) ? b->head : NULL;
 	ft_putstr(" b");
 	ft_putchar('|');
 	while (curr)
 	{
-		if (curr != b->first)
+		if (curr != b->head)
 			ft_putchar(' ');
-		ft_putnbr(curr->n);
+		ft_putnbr(curr->content_size);
 		curr = curr->next;
 	}
 	ft_putchar('|');

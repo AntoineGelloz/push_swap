@@ -6,7 +6,7 @@
 /*   By: agelloz <agelloz@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/19 11:33:53 by agelloz           #+#    #+#             */
-/*   Updated: 2019/07/30 13:02:59 by agelloz          ###   ########.fr       */
+/*   Updated: 2019/09/03 16:54:06 by agelloz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,10 @@ int		ft_is_sorted(t_stack *a)
 {
 	t_list	*curr;
 
-	curr = a->first;
+	curr = a->head;
 	while (curr->next)
 	{
-		if (curr->n > curr->next->n)
+		if (curr->content_size > curr->next->content_size)
 			break ;
 		curr = curr->next;
 	}
@@ -32,15 +32,15 @@ void	ft_three_numbers2(t_stack **a)
 {
 	t_list	*curr;
 
-	curr = (**a).first;
-	if (curr->next->n > curr->next->next->n)
+	curr = (**a).head;
+	if (curr->next->content_size > curr->next->next->content_size)
 	{
 		ft_swap(a, 'a', 1);
 		ft_reverse_rotate(a, 'a', 1);
 	}
 	else
 	{
-		if ((**a).first->n < (**a).first->next->next->n)
+		if ((**a).head->content_size < (**a).head->next->next->content_size)
 			ft_swap(a, 'a', 1);
 		else
 			ft_rotate(a, 'a', 1);
@@ -51,13 +51,13 @@ void	ft_three_numbers(t_stack **a)
 {
 	t_list	*curr;
 
-	curr = (**a).first;
-	if (curr->n > curr->next->n)
+	curr = (**a).head;
+	if (curr->content_size > curr->next->content_size)
 		ft_three_numbers2(a);
-	else if (curr->n < curr->next->n)
+	else if (curr->content_size < curr->next->content_size)
 	{
 		ft_reverse_rotate(a, 'a', 1);
-		if ((**a).first->n > (**a).first->next->n)
+		if ((**a).head->content_size > (**a).head->next->content_size)
 			ft_swap(a, 'a', 1);
 	}
 }
@@ -77,8 +77,8 @@ int		main(int ac, char **av)
 	if (!(a = malloc(sizeof(*a)))
 			|| !(b = malloc(sizeof(*b))))
 		return (ft_exit(a, b));
-	a->first = NULL;
-	b->first = NULL;
+	a->head = NULL;
+	b->head = NULL;
 	if (ac < 2 || !ft_fill_a(&a, ac, av) || ft_is_sorted(a))
 		return (ft_exit(a, b));
 	if (ac == 4)

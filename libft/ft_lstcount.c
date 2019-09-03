@@ -1,20 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.h                                    :+:      :+:    :+:   */
+/*   ft_lstcount.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: agelloz <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: agelloz <agelloz@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/04/11 12:05:07 by agelloz           #+#    #+#             */
-/*   Updated: 2019/05/07 16:17:26 by agelloz          ###   ########.fr       */
+/*   Created: 2019/09/03 14:20:51 by agelloz           #+#    #+#             */
+/*   Updated: 2019/09/03 14:21:04 by agelloz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GET_NEXT_LINE_H
-# define GET_NEXT_LINE_H
+#include "libft.h"
 
-# define BUFF_SIZE 5000
+int	ft_lstcount(t_list *lst)
+{
+	int	i;
 
-int get_next_line(const int fd, char **line);
-
-#endif
+	i = 0;
+	while (lst)
+	{
+		lst = lst->next;
+		i++;
+	}
+	return (i);
+}

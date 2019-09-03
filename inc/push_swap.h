@@ -6,7 +6,7 @@
 /*   By: agelloz <agelloz@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/19 11:37:42 by agelloz           #+#    #+#             */
-/*   Updated: 2019/07/29 16:35:22 by agelloz          ###   ########.fr       */
+/*   Updated: 2019/09/03 16:30:20 by agelloz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,23 @@
 # include <stdio.h>
 # include "libft.h"
 
+typedef struct	s_s
+{
+	int	median;
+	int max;
+	int min;
+	int nb1;
+	int nb2;
+	int nb3;
+	int pushed;
+	int rotated;
+	int unsorted;
+}				t_s;
+
 typedef struct	s_stack
 {
 	char	name;
-	int	len;
+	int		elements;
 	t_list	*head;
 }				t_stack;
 

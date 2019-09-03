@@ -6,7 +6,7 @@
 /*   By: agelloz <agelloz@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/19 11:33:53 by agelloz           #+#    #+#             */
-/*   Updated: 2019/07/29 16:37:37 by agelloz          ###   ########.fr       */
+/*   Updated: 2019/09/03 16:50:16 by agelloz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,28 +57,28 @@ int		ft_check_n(char **av, int i)
 
 void	ft_delete_stacks(t_stack *a, t_stack *b)
 {
-	t_number	*curr;
+	t_list	*curr;
 
 	if (a)
 	{
-		curr = a->first;
+		curr = a->head;
 		while (curr)
 		{
-			a->first = a->first->next;
+			a->head = a->head->next;
 			free(curr);
-			curr = a->first;
+			curr = a->head;
 		}
 		free(a);
 		a = NULL;
 	}
 	if (!b)
 		return ;
-	curr = b->first;
+	curr = b->head;
 	while (curr)
 	{
-		b->first = b->first->next;
+		b->head = b->head->next;
 		free(curr);
-		curr = b->first;
+		curr = b->head;
 	}
 	free(b);
 	b = NULL;
@@ -86,9 +86,9 @@ void	ft_delete_stacks(t_stack *a, t_stack *b)
 
 int		ft_fill_a(t_stack **a, int ac, char **av)
 {
-	t_number	*curr;
-	t_number	*prev;
-	int			i;
+	t_list	*curr;
+	t_list	*prev;
+	int		i;
 
 	i = 0;
 	while (++i < ac)
@@ -98,10 +98,9 @@ int		ft_fill_a(t_stack **a, int ac, char **av)
 			if (!(curr = malloc(sizeof(*curr))))
 				return (0);
 			(i != 1) ? prev->next = curr : 0;
-			curr->n = ft_atoi(av[i]);
-			curr->index = i - 1;
+			curr->content_size = ft_atoi(av[i]);
 			curr->next = NULL;
-			(i == 1) ? (**a).first = curr : 0;
+			(i == 1) ? (**a).head = curr : 0;
 			prev = curr;
 			curr = curr->next;
 		}
