@@ -6,7 +6,7 @@
 /*   By: agelloz <agelloz@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/19 11:33:53 by agelloz           #+#    #+#             */
-/*   Updated: 2019/09/03 16:50:16 by agelloz          ###   ########.fr       */
+/*   Updated: 2019/09/04 18:33:44 by agelloz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,28 +87,22 @@ void	ft_delete_stacks(t_stack *a, t_stack *b)
 int		ft_fill_a(t_stack **a, int ac, char **av)
 {
 	t_list	*curr;
-	t_list	*prev;
 	int		i;
+	int		num;
 
 	i = 0;
 	while (++i < ac)
 	{
-		if (ft_check_n(av, i))
-		{
-			if (!(curr = malloc(sizeof(*curr))))
-				return (0);
-			(i != 1) ? prev->next = curr : 0;
-			curr->content_size = ft_atoi(av[i]);
-			curr->next = NULL;
-			(i == 1) ? (**a).head = curr : 0;
-			prev = curr;
-			curr = curr->next;
-		}
-		else
+		if (!ft_check_n(av, i))
 		{
 			ft_putstr("Error\n");
 			return (0);
 		}
+		num = ft_atoi(av[i]);
+		if (!(curr = ft_lstnew(&num, sizeof(int))))
+			return (0);
+		ft_lstprepend(&(**a)->head, curr);
 	}
+	(**a).elements = ac - 1;
 	return (1);
 }

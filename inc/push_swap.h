@@ -6,7 +6,7 @@
 /*   By: agelloz <agelloz@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/19 11:37:42 by agelloz           #+#    #+#             */
-/*   Updated: 2019/09/03 16:30:20 by agelloz          ###   ########.fr       */
+/*   Updated: 2019/09/04 13:47:40 by agelloz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ typedef struct	s_s
 	int pushed;
 	int rotated;
 	int unsorted;
+	int	initial_elements;
 }				t_s;
 
 typedef struct	s_stack
@@ -45,8 +46,6 @@ void	ft_swap(t_stack **s, char c, int print_mode);
 void	ft_rotate(t_stack **s, char c, int print_mode);
 void	ft_reverse_rotate(t_stack **s, char c, int print_mode);
 void	ft_push(t_stack **s1, t_stack **s2, char c, int print_mode);
-void	ft_selection_sort(t_stack **a, t_stack **b, int elements);
-void	ft_insertion_sort(t_stack **a, t_stack **b, int elements);
-void	ft_quicksort(t_stack **a, t_stack **b, int elements);
+void	ft_quicksort(t_stack *a, t_stack *b);
 
 #endif

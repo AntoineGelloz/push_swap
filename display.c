@@ -6,7 +6,7 @@
 /*   By: agelloz <agelloz@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/19 11:33:53 by agelloz           #+#    #+#             */
-/*   Updated: 2019/09/03 16:51:32 by agelloz          ###   ########.fr       */
+/*   Updated: 2019/09/04 17:49:31 by agelloz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	ft_display_stacks(t_stack *a, t_stack *b)
 	{
 		if (curr != a->head)
 			ft_putchar(' ');
-		ft_putnbr(curr->content_size);
+		ft_putnbr(*(int *)curr->content);
 		curr = curr->next;
 	}
 	ft_putchar('|');
@@ -34,7 +34,7 @@ void	ft_display_stacks(t_stack *a, t_stack *b)
 	{
 		if (curr != b->head)
 			ft_putchar(' ');
-		ft_putnbr(curr->content_size);
+		ft_putnbr(*(int *)curr->content);
 		curr = curr->next;
 	}
 	ft_putchar('|');

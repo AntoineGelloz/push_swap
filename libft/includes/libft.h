@@ -6,7 +6,7 @@
 /*   By: agelloz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/02 17:55:27 by agelloz           #+#    #+#             */
-/*   Updated: 2019/09/03 17:05:49 by agelloz          ###   ########.fr       */
+/*   Updated: 2019/09/04 18:16:04 by agelloz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,6 +93,9 @@ t_list				*ft_lstncpy(t_list *source, int size, int (*cpy)(void *, void *));
 int					ft_lstcount(t_list *lst);
 void				ft_lst_mergesort(t_list **source, int (*cmp)(void *, void *));
 void				ft_lstrev(t_list **alst);
+void				ft_lstappend(t_list **alst, t_list *new);
+void				ft_lstprepend(t_list **alst, t_list *new);
+t_list				*ft_lstcpy(t_list *source, int (*cpy)(void *, void *));
 
 int					get_next_line(const int fd, char **line);
 

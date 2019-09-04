@@ -1,32 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstncpy.c                                       :+:      :+:    :+:   */
+/*   ft_lstappend.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: agelloz <agelloz@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/09/03 14:12:38 by agelloz           #+#    #+#             */
-/*   Updated: 2019/09/04 17:00:19 by agelloz          ###   ########.fr       */
+/*   Created: 2019/09/04 18:15:13 by agelloz           #+#    #+#             */
+/*   Updated: 2019/09/04 18:15:17 by agelloz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-t_list	*ft_lstncpy(t_list *source, int size, int (*cpy)(void *, void *))
+void	ft_lstappend(t_list **alst, t_list *new)
 {
-	t_list	*copy;
-	t_list	*node;
-
-	copy = NULL;
-	while (source && size--)
+	if (*alst && new)
 	{
-		if (!(node = ft_lstnew(source->content, sizeof(source->content))))
-			return (NULL);
-		if (cpy)
-			if (cpy(node->content, source->content))
-				return (NULL);
-		ft_lstprepend(&copy, node);
-		source = source->next;
+		while ((*alst)->next)
+			*alst = (*alst)->next;
+		(*alst)->next = new;
 	}
-	return (copy);
 }
