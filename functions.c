@@ -6,7 +6,7 @@
 /*   By: agelloz <agelloz@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/19 11:33:53 by agelloz           #+#    #+#             */
-/*   Updated: 2019/09/04 18:33:44 by agelloz          ###   ########.fr       */
+/*   Updated: 2019/09/05 13:45:52 by agelloz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,7 @@ void	ft_delete_stacks(t_stack *a, t_stack *b)
 	b = NULL;
 }
 
-int		ft_fill_a(t_stack **a, int ac, char **av)
+int		ft_fill_a(t_stack *a, int ac, char **av)
 {
 	t_list	*curr;
 	int		i;
@@ -101,8 +101,8 @@ int		ft_fill_a(t_stack **a, int ac, char **av)
 		num = ft_atoi(av[i]);
 		if (!(curr = ft_lstnew(&num, sizeof(int))))
 			return (0);
-		ft_lstprepend(&(**a)->head, curr);
+		ft_lstprepend(&a->head, curr);
 	}
-	(**a).elements = ac - 1;
+	a->elements = ac - 1;
 	return (1);
 }

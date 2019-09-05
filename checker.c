@@ -6,7 +6,7 @@
 /*   By: agelloz <agelloz@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/19 11:33:53 by agelloz           #+#    #+#             */
-/*   Updated: 2019/09/04 18:45:32 by agelloz          ###   ########.fr       */
+/*   Updated: 2019/09/05 11:48:01 by agelloz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ int	ft_check_line(char *line)
 	return (1);
 }
 
-int	ft_check_instruction(char *line, t_stack **a, t_stack **b)
+int	ft_check_instruction(char *line, t_stack *a, t_stack *b)
 {
 	if (!ft_check_line(line))
 		return (0);
@@ -75,15 +75,12 @@ int	ft_check_instruction(char *line, t_stack **a, t_stack **b)
 
 int	main(int ac, char **av)
 {
-	t_stack	*a;
-	t_stack	*b;
+	t_stack	a;
+	t_stack	b;
 	char	*line;
 
-	if (!(a = malloc(sizeof(*a)))
-			|| !(b = malloc(sizeof(*b))))
-		return (0);
-	a->head = NULL;
-	b->head = NULL;
+	a.head = NULL;
+	b.head = NULL;
 	line = NULL;
 	if (ac < 2 || !ft_fill_a(&a, ac, av))
 		return (0);
@@ -94,11 +91,11 @@ int	main(int ac, char **av)
 		ft_strdel(&line);
 	}
 	ft_strdel(&line);
-	if (ft_check_stacks(a, b))
+	if (ft_check_stacks(&a, &b))
 		ft_putstr("OK\n");
 	else
 		ft_putstr("KO\n");
-	ft_display_stacks(a, b);
-	ft_delete_stacks(a, b);
+	ft_display_stacks(&a, &b);
+	ft_delete_stacks(&a, &b);
 	return (0);
 }

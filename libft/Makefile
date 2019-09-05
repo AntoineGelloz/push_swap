@@ -3,46 +3,159 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: agelloz <marvin@42.fr>                     +#+  +:+       +#+         #
+#    By: agelloz <agelloz@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2019/04/02 11:12:29 by agelloz           #+#    #+#              #
-#    Updated: 2019/09/04 18:17:46 by agelloz          ###   ########.fr        #
+#    Created: 2019/09/05 10:17:32 by agelloz           #+#    #+#              #
+#    Updated: 2019/09/05 14:42:25 by agelloz          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-.PHONY: all clean fclean re
-
 NAME = libft.a
-CC = gcc
-CFLAGS = -Wall -Werror -Wextra -Iincludes -c
-SRC = ft_isprint.c ft_lstnew.c ft_memmove.c ft_putnbr_fd.c ft_strcpy.c \
-ft_strjoin.c ft_strncmp.c ft_strstr.c ft_atoi.c ft_itoa.c ft_memalloc.c \
-ft_memset.c ft_putstr.c ft_strdel.c ft_strjoinfree.c ft_strncpy.c ft_strsub.c \
-ft_bzero.c ft_lstadd.c ft_memccpy.c ft_putchar.c ft_putstr_fd.c ft_strdup.c \
-ft_strlcat.c ft_strnequ.c ft_strtrim.c ft_isalnum.c ft_lstdel.c ft_memchr.c \
-ft_putchar_fd.c ft_strcat.c ft_strdupfree.c ft_strlen.c ft_strnew.c \
-ft_tolower.c ft_isalpha.c ft_lstdelone.c ft_memcmp.c ft_putendl.c ft_strchr.c \
-ft_strequ.c ft_strmap.c ft_strnstr.c ft_toupper.c ft_isascii.c ft_lstiter.c \
-ft_memcpy.c ft_putendl_fd.c ft_strclr.c ft_striter.c ft_strmapi.c \
-ft_strrchr.c ft_isdigit.c ft_lstmap.c ft_memdel.c ft_putnbr.c ft_strcmp.c \
-ft_striteri.c ft_strncat.c ft_strsplit.c get_next_line.c ft_lstncpy.c \
-ft_lst_mergesort.c ft_lstcount.c ft_lstcpy.c ft_lstprepend.c ft_lstrev.c \
-ft_lstappend.c
+CC = Clang
+CFLAGS = -Wall -Werror -Wextra
+CLEANUP = /bin/rm -rf
+INC = libft.h
+INC_DIR = inc/
+OBJ_DIR = obj/
 
-OBJ = $(SRC:%.c=%.o)
+vpath %.c src/lists
+vpath %.c src/other
+vpath %.c src/printing
+vpath %.c src/strings
+vpath %.c src/printf
+vpath %.h inc/
 
-all: $(NAME)
+SRC += float_aux.c
+SRC += float_calc.c
+SRC += float_calc_string.c
+SRC += float_calc_string2.c
+SRC += float_format.c
+SRC += formatting.c
+SRC += initialize.c
+SRC += parsing.c
+SRC += print_address.c
+SRC += print_char.c
+SRC += print_error.c
+SRC += print_float.c
+SRC += print_octal.c
+SRC += print_percent.c
+SRC += print_signed_base.c
+SRC += print_string.c
+SRC += print_unsigned_base.c
+SRC += printf.c
+SRC += ft_memalloc.c
+SRC += ft_memccpy.c
+SRC += ft_memchr.c
+SRC += ft_memcmp.c
+SRC += ft_memcpy.c
+SRC += ft_memdel.c
+SRC += ft_memmove.c
+SRC += ft_memset.c
+SRC += ft_delcontent.c
+SRC += ft_cpycontent.c
+SRC += ft_ascending_order.c
+SRC += ft_descending_order.c
+SRC += ft_bzero.c
+SRC += ft_isalnum.c
+SRC += ft_isalpha.c
+SRC += ft_isascii.c
+SRC += ft_isdigit.c
+SRC += ft_isprint.c
+SRC += ft_strcat.c
+SRC += ft_strchr.c
+SRC += ft_strclr.c
+SRC += ft_strcmp.c
+SRC += ft_strcpy.c
+SRC += ft_strdel.c
+SRC += ft_strdup.c
+SRC += ft_strequ.c
+SRC += ft_striter.c
+SRC += ft_striteri.c
+SRC += ft_strjoin.c
+SRC += ft_strjoinfree.c
+SRC += ft_strlcat.c
+SRC += ft_strlen.c
+SRC += ft_strmap.c
+SRC += ft_strmapi.c
+SRC += ft_strncat.c
+SRC += ft_strncmp.c
+SRC += ft_strncpy.c
+SRC += ft_strnequ.c
+SRC += ft_strnew.c
+SRC += ft_strnstr.c
+SRC += ft_strrchr.c
+SRC += ft_strsplit.c
+SRC += ft_strstr.c
+SRC += ft_strsub.c
+SRC += ft_strtrim.c
+SRC += ft_tolower.c
+SRC += ft_toupper.c
+SRC += ft_atoi.c
+SRC += ft_itoa.c
+SRC += get_next_line.c
+SRC += ft_putchar.c
+SRC += ft_putchar_fd.c
+SRC += ft_putendl.c
+SRC += ft_putendl_fd.c
+SRC += ft_putnbr.c
+SRC += ft_putnbr_fd.c
+SRC += ft_putstr.c
+SRC += ft_putstr_fd.c
+SRC += ft_lstnew.c
+SRC += ft_lstprepend.c
+SRC += ft_lstappend.c
+SRC += ft_lstdel.c
+SRC += ft_lstdelone.c
+SRC += ft_lstiter.c
+SRC += ft_lstsorted.c
+SRC += ft_lstswap.c
+SRC += ft_lstpush.c
+SRC += ft_lstrotate.c
+SRC += ft_lstrevrotate.c
+SRC += ft_lstcount.c
+SRC += ft_lstcpy.c
+SRC += ft_lstncpy.c
+SRC += ft_lstrev.c
+SRC += ft_lstgetmin.c
+SRC += ft_lstgetmax.c
+SRC += ft_lstindex.c
+SRC += ft_lst_mergesort.c
 
-$(NAME): Makefile
-	@$(CC) $(CFLAGS) $(SRC)
-	@ar rc $(NAME) $(OBJ)
-	@ranlib $(NAME)
-	@echo "static library created: libft.a"
+OBJ = $(patsubst %.c, $(OBJ_DIR)%.o, $(SRC))
+
+all: $(OBJ_DIR) $(NAME)
+
+$(NAME): $(OBJ)
+	ar -rusc $@ $^
+	ranlib $@
+	printf "$(GREEN)created: $@\n$(NC)"
+
+$(OBJ): $(OBJ_DIR)%.o : %.c $(INC)
+	$(CC) -c $(CFLAGS) -I$(INC_DIR) $< -o $@
+	printf "$(CYAN)compiling: $<\n$(NC)"
+
+$(OBJ_DIR):
+	mkdir -p $@
 
 clean:
-	@rm -f $(OBJ)
+	$(CLEANUP) $(OBJ)
+	$(CLEANUP) $(OBJ_DIR)
+	#printf "$(RED)objects removed from libft\n$(NC)"
 
 fclean: clean
-	@rm -f $(NAME)
+	$(CLEANUP) $(NAME)
+	printf "$(RED)deleted: $(NAME)\n$(NC)"
 
 re: fclean all
+
+CYAN=\033[0;36m
+BLUE=\033[0;34m
+GREEN=\033[32m
+RED=\033[0;31m
+WHITE=\033[0;37m
+PURPLE=\033[0;35m
+YELLOW=\033[0;33m
+NC=\033[0m
+
+.PHONY: all clean fclean re
+.SILENT:
