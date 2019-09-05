@@ -6,7 +6,7 @@
 /*   By: agelloz <agelloz@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/19 11:33:53 by agelloz           #+#    #+#             */
-/*   Updated: 2019/09/05 11:48:01 by agelloz          ###   ########.fr       */
+/*   Updated: 2019/09/05 16:00:11 by agelloz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,6 @@ int	main(int ac, char **av)
 		ft_putstr("OK\n");
 	else
 		ft_putstr("KO\n");
-	ft_display_stacks(&a, &b);
-	ft_delete_stacks(&a, &b);
+	//ft_display_stacks(&a, &b);
 	return (0);
 }

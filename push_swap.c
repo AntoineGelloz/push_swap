@@ -6,7 +6,7 @@
 /*   By: agelloz <agelloz@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/19 11:33:53 by agelloz           #+#    #+#             */
-/*   Updated: 2019/09/05 14:43:39 by agelloz          ###   ########.fr       */
+/*   Updated: 2019/09/05 18:02:45 by agelloz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,8 @@ int		ft_isstack_sorted(t_stack *a)
 
 int		ft_exit(t_stack *a, t_stack *b)
 {
+	a = NULL;
+	b = NULL;
 	//ft_delete_stacks(a, b);
 	return (0);
 }
@@ -47,8 +49,8 @@ int		main(int ac, char **av)
 	b.elements = 0;
 	if (ac < 2 || !ft_fill_a(&a, ac, av) || ft_isstack_sorted(&a))
 		return (ft_exit(&a, &b));
-	ft_display_stacks(&a, &b);
+	//ft_display_stacks(&a, &b);
 	ft_quicksort(&a, &b);
-	ft_display_stacks(&a, &b);
+	//ft_display_stacks(&a, &b);
 	return (ft_exit(&a, &b));
 }

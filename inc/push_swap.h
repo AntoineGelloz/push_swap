@@ -6,7 +6,7 @@
 /*   By: agelloz <agelloz@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/19 11:37:42 by agelloz           #+#    #+#             */
-/*   Updated: 2019/09/05 11:49:12 by agelloz          ###   ########.fr       */
+/*   Updated: 2019/09/05 15:58:47 by agelloz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,6 @@ typedef struct	s_stack
 
 int		ft_check_n(char **av, int i);
 void	ft_display_stacks(t_stack *a, t_stack *b);
-void	ft_delete_stacks(t_stack *a, t_stack *b);
 int		ft_fill_a(t_stack *a, int ac, char **av);
 int		get_next_line(const int fd, char **line);
 void	ft_swap(t_stack *s, int print_mode);
