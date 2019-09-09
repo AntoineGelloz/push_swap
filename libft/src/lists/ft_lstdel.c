@@ -22,16 +22,9 @@
 
 void	ft_lstdel(t_list **alst, void (*del)(void *, size_t))
 {
-	t_list	*tmp;
-
-	if (!alst || !del)
-		return ;
-	while (*alst)
+	if (*alst)
 	{
-		tmp = (*alst)->next;
-		del((*alst)->content, (*alst)->content_size);
-		free(*alst);
-		*alst = tmp;
+		ft_lstdel(&(*alst)->next, del);
+		ft_lstdelone(alst, del);
 	}
-	*alst = NULL;
 }

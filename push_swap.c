@@ -52,12 +52,15 @@ int		main(int ac, char **av)
 	b.name = 'b';
 	a.elements = 0;
 	b.elements = 0;
-	if (ac < 2)
+	if (ac <= 2)
 		return (0);
 	if (!ft_fill_a(&a, ac, av, 0))
 		return (ft_error_exit(&a));
 	if (ft_is_stack_sorted(&a))
+	{
+		ft_delete_stacks(&a, &b);
 		return (0);
+	}
 	ft_init_s(&s);
 	s.initial_elements = a.elements;
 	ft_sort_sublist(&a, &b, &s, a.elements);

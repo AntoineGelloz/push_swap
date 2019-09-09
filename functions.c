@@ -50,6 +50,8 @@ int		ft_check_n(char **av, int i)
 		neg = 1;
 		tmp++;
 	}
+	else if (*tmp == '+')
+		tmp++;
 	if (!*tmp)
 		return (0);
 	return (ft_check_n2(av, tmp, neg, i));

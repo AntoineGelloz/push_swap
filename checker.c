@@ -17,7 +17,7 @@ int	ft_check_stacks(t_stack *a, t_stack *b)
 	t_list	*curr;
 
 	curr = a->head;
-	while (curr->next)
+	while (curr && curr->next)
 	{
 		if (*(int *)curr->content > *(int *)curr->next->content)
 			return (0);
@@ -45,10 +45,8 @@ int	ft_check_line(char *line)
 	return (1);
 }
 
-int	ft_check_instruction(char *line, t_stack *a, t_stack *b, int print_mode)
+void	ft_exec_instruction(char *line, t_stack *a, t_stack *b, int print_mode)
 {
-	if (!ft_check_line(line))
-		return (0);
 	(!ft_strcmp(line, "sa")) ? ft_swap(a, print_mode) : 0;
 	(!ft_strcmp(line, "sb")) ? ft_swap(b, print_mode) : 0;
 	(!ft_strcmp(line, "ss")) ? ft_sswap(a, b, print_mode) : 0;
@@ -60,7 +58,6 @@ int	ft_check_instruction(char *line, t_stack *a, t_stack *b, int print_mode)
 	(!ft_strcmp(line, "rra")) ? ft_reverse_rotate(a, print_mode) : 0;
 	(!ft_strcmp(line, "rrb")) ? ft_reverse_rotate(b, print_mode) : 0;
 	(!ft_strcmp(line, "rrr")) ? ft_rreverse_rotate(a, b, print_mode) : 0;
-	return (1);
 }
 
 int	main(int ac, char **av)
@@ -80,21 +77,26 @@ int	main(int ac, char **av)
 		return (ft_error_exit(&a));
 	while (get_next_line(0, &line) > 0)
 	{
+		if (line && !ft_check_line(line))
+		{
+			ft_delete_stacks(&a, &b);
+			ft_strdel(&line);
+			return (0);
+		}
 		if (ft_strequ(av[1], "-v"))
 		{
-			if (!ft_check_instruction(line, &a, &b, 1))
-				break ;
+			ft_exec_instruction(line, &a, &b, 1);
 			ft_display_stacks(&a, &b);
 		}
-		else if (!ft_check_instruction(line, &a, &b, 0))
-			break ;
+		else
+			ft_exec_instruction(line, &a, &b, 0);
 		ft_strdel(&line);
 	}
-	ft_strdel(&line);
 	if (ft_check_stacks(&a, &b))
 		ft_putendl("OK");
 	else
 		ft_putendl("KO");
 	ft_delete_stacks(&a, &b);
+	ft_strdel(&line);
 	return (0);
 }

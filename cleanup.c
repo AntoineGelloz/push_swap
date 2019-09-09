@@ -12,14 +12,19 @@
 
 #include "push_swap.h"
 
-int		ft_error_exit(t_stack *a)
+int	ft_error_exit(t_stack *a)
 {
 	ft_lstdel(&a->head, ft_delcontent);
+	a->head = NULL;
 	return (0);
 }
 
 void	ft_delete_stacks(t_stack *a, t_stack *b)
 {
-	ft_lstdel(&a->head, ft_delcontent);
-	ft_lstdel(&b->head, ft_delcontent);
+	if (a->head)
+		ft_lstdel(&a->head, ft_delcontent);
+	if (b->head)
+		ft_lstdel(&b->head, ft_delcontent);
+	a->head = NULL;
+	b->head = NULL;
 }
