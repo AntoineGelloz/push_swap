@@ -6,7 +6,7 @@
 /*   By: agelloz <agelloz@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/19 11:33:53 by agelloz           #+#    #+#             */
-/*   Updated: 2019/09/05 16:53:02 by agelloz          ###   ########.fr       */
+/*   Updated: 2019/09/09 16:53:13 by agelloz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,18 +55,20 @@ int		ft_check_n(char **av, int i)
 	return (ft_check_n2(av, tmp, neg, i));
 }
 
-int		ft_fill_a(t_stack *a, int ac, char **av)
+int		ft_fill_a(t_stack *a, int ac, char **av, int checker)
 {
 	t_list	*curr;
 	int		i;
 	int		num;
 
 	i = 0;
+	if (checker && ft_strequ(av[1], "-v"))
+		i++;
 	while (++i < ac)
 	{
 		if (!ft_check_n(av, i))
 		{
-			ft_putstr("Error\n");
+			ft_putendl("Error");
 			return (0);
 		}
 		num = ft_atoi(av[i]);

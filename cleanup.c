@@ -1,37 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   instructions2.c                                    :+:      :+:    :+:   */
+/*   cleanup.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: agelloz <agelloz@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/09/04 18:42:25 by agelloz           #+#    #+#             */
-/*   Updated: 2019/09/09 14:46:59 by agelloz          ###   ########.fr       */
+/*   Created: 2019/09/09 14:15:06 by agelloz           #+#    #+#             */
+/*   Updated: 2019/09/09 17:12:49 by agelloz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	ft_sswap(t_stack *a, t_stack *b, int print_mode)
+int		ft_error_exit(t_stack *a)
 {
-	ft_swap(a, 0);
-	ft_swap(b, 0);
-	if (print_mode)
-		ft_putendl("ss");
+	ft_lstdel(&a->head, ft_delcontent);
+	return (0);
 }
 
-void	ft_rrotate(t_stack *a, t_stack *b, int print_mode)
+void	ft_delete_stacks(t_stack *a, t_stack *b)
 {
-	ft_rotate(a, 0);
-	ft_rotate(b, 0);
-	if (print_mode)
-		ft_putendl("rr");
-}
-
-void	ft_rreverse_rotate(t_stack *a, t_stack *b, int print_mode)
-{
-	ft_reverse_rotate(a, 0);
-	ft_reverse_rotate(b, 0);
-	if (print_mode)
-		ft_putendl("rrr");
+	ft_lstdel(&a->head, ft_delcontent);
+	ft_lstdel(&b->head, ft_delcontent);
 }

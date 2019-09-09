@@ -6,7 +6,7 @@
 #    By: agelloz <agelloz@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/07/19 11:32:25 by agelloz           #+#    #+#              #
-#    Updated: 2019/09/05 14:41:28 by agelloz          ###   ########.fr        #
+#    Updated: 2019/09/09 15:16:57 by agelloz          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,9 +17,9 @@ FLAGS = -Wall -Wextra
 LIBH = libft/inc
 LIBA = libft/libft.a
 
-SRC1 = checker.c instructions1.c instructions2.c functions.c display.c
-SRC2 = push_swap.c instructions1.c instructions2.c functions.c \
-	   display.c quicksort.c
+SRC1 = checker.c instructions.c instructions2.c functions.c cleanup.c display.c
+SRC2 = push_swap.c instructions.c instructions2.c functions.c sort.c \
+	   sort_a.c sort_b.c cleanup.c
 OBJ1 = $(SRC1:%.c=%.o)
 OBJ2 = $(SRC2:%.c=%.o)
 

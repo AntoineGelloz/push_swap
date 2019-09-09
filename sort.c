@@ -1,57 +1,50 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   quicksort.c                                        :+:      :+:    :+:   */
+/*   sort.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: agelloz <agelloz@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/19 11:33:53 by agelloz           #+#    #+#             */
-/*   Updated: 2019/09/05 18:04:05 by agelloz          ###   ########.fr       */
+/*   Updated: 2019/09/09 14:51:04 by agelloz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-#include "libft.h"
-#include "printf.h"
 
 void	ft_update_s(t_stack *stack, t_s *s, int elements)
 {
+	//ft_printf("update s\n");
 	s->max = ft_lstgetmax(stack->head, s->unsorted);
 	s->min = ft_lstgetmin(stack->head, s->unsorted);
 	s->nb1 = *(int *)stack->head->content;
 	s->nb2 = *(int *)stack->head->next->content;
 	if (elements >= 3)
-		s->nb3 = *(int *)stack->head->next->next->content;	
-}
-
-int	ft_get_median_value(t_list *list)
-{
-	int     k;
-	int     index;
-
-	index = ft_lstcount(list) / 2;
-	k = -1;
-	while (list && ++k < index)
-		list = list->next;
-	return (*(int *)list->content);
+		s->nb3 = *(int *)stack->head->next->next->content;
 }
 
 t_list	*ft_get_sorted_copy(t_list *list, t_s *s, int elements)
 {
 	t_list  *sorted_copy;
+	t_list  *curr;
+	int		index;
+	int		i;
 
 	//ft_putstr("get_sorted_copy\n");
 	if (!(sorted_copy = ft_lstncpy(list, elements, ft_cpycontent)))
 		return (NULL);
-	//ft_putstr("end\n");
 	ft_lst_mergesort(&sorted_copy, ft_descending_order);
-	//printf("merge sorted\n");
-	s->median = ft_get_median_value(sorted_copy);
+	curr = sorted_copy;
+	index = ft_lstcount(sorted_copy) / 2;
+	i = -1;
+	while (curr && ++i < index)
+		curr = curr->next;
+	s->median = *(int *)curr->content;
 	//printf("median:%d\n", s->median);
 	return (sorted_copy);
 }
 
-int	ft_is_to_push(t_stack *stack, t_s *s, int elements)
+int		ft_is_to_push(t_stack *stack, t_s *s, int elements)
 {
 	if (stack->name == 'a' && *(int *)stack->head->content < s->median)
 		return (1);
@@ -65,14 +58,15 @@ int	ft_is_to_push(t_stack *stack, t_s *s, int elements)
 	return (0);
 }
 
-// Dans A : envoie dans B les valeurs inferieures a la mediane et renvoie le ‘pushed’. 
-// Dans B : envoie dans A les valeurs superieures a la mediane et renvoie ‘pushed’
-int	ft_split_half(t_stack *stack1, t_stack *stack2, t_s *s, int elements)
+// Dans A : envoie dans B les valeurs inferieures a la mediane et renvoie le ‘pushed’ 
+// Dans B : envoie dans A les valeurs superieures a la mediane et renvoie le ‘pushed’
+int		ft_push_half(t_stack *stack1, t_stack *stack2, t_s *s, int elements)
 {
 	t_list	*sorted_copy;
 	int		limit;
 	int		stack_elements;
 
+	//ft_printf("push_half:%d %c->%c\n", stack1->elements, stack1->name, stack2->name);
 	stack_elements = stack1->elements;
 	sorted_copy = ft_get_sorted_copy(stack1->head, s, elements);
 	if (stack1->name == 'b')
@@ -98,165 +92,26 @@ int	ft_split_half(t_stack *stack1, t_stack *stack2, t_s *s, int elements)
 	return (s->pushed);
 }
 
-void	ft_sort_b(t_stack *a, t_stack *b, t_s *s)
-{
-	//ft_putstr("sortb\n");
-	if (s->nb1 == s->max)
-	{
-		ft_push(b, a, 1);
-		ft_swap(b, 1);
-		ft_push(b, a, 1);
-		ft_push(b, a, 1);
-	}
-	else if (s->nb1 == s->min)
-	{
-		ft_swap(b, 1);
-		ft_push(b, a, 1);
-		ft_swap(b, 1);
-		ft_push(b, a, 1);
-		if (s->nb2 != s->max)
-			ft_swap(a, 1);
-		ft_push(b, a, 1);
-	}
-	else
-	{
-		if (s->nb2 == s->min)
-		{
-			ft_push(b, a, 1);
-			ft_swap(b, 1);
-			ft_push(b, a, 1);
-			ft_swap(a, 1);
-			ft_push(b, a, 1);
-		}
-		else
-		{
-			ft_swap(b, 1);
-			ft_push(b, a, 1);
-			ft_push(b, a, 1);
-			ft_push(b, a, 1);
-		}
-	}
-	//ft_putstr("end\n");
-}
-
-void	ft_sort_a(t_stack *a, t_stack *b, t_s *s)
-{
-	//ft_putstr("sorta\n");
-	if (s->nb1 == s->max)
-	{
-		ft_swap(a, 1);
-		ft_push(a, b, 1);
-		ft_swap(a, 1);
-		ft_push(b, a, 1);
-		if (s->nb2 != s->min)
-			ft_swap(a, 1);
-	}
-	else if (s->nb1 == s->min)
-	{
-		ft_push(a, b, 1);
-		ft_swap(a, 1);
-		ft_push(b, a, 1);
-	}
-	else
-	{
-		if (s->nb2 == s->min)
-			ft_swap(a, 1);
-		else
-		{
-			ft_push(a, b, 1);
-			ft_swap(a, 1);
-			ft_push(b, a, 1);
-			ft_swap(a, 1);
-		}
-	}
-	//ft_putstr("end\n");
-}
-
-void	ft_simple_sort_a(t_stack *a, t_s *s)
-{
-	//ft_putstr("simple_sorta\n");
-	if (s->nb1 == s->max)
-	{
-		if (s->nb2 == s->min)
-			ft_rotate(a, 1);
-		else
-		{
-			ft_swap(a, 1);
-			//ft_putendl("reverse2");
-			ft_reverse_rotate(a, 1);
-		}
-	}
-	else if (s->nb1 != s->min && s->nb1 != s->max)
-	{
-		//ft_putendl("reverse3");
-		s->nb2 == s->min ? ft_swap(a, 1) : ft_reverse_rotate(a, 1);
-	}
-	else
-	{
-		//ft_putendl("reverse4");
-		ft_reverse_rotate(a, 1);
-		ft_swap(a, 1);
-	}
-	//ft_putstr("end\n");
-}
-
-void	ft_simple_sort_b(t_stack *b, t_s *s)
-{
-	//ft_putstr("simple_sortb\n");
-	if (s->nb1 == s->max)
-	{
-		//ft_putendl("reverse5");
-		ft_reverse_rotate(b, 1);
-		ft_swap(b, 1);
-	}
-	else if (s->nb1 == s->min)
-	{
-		if (s->nb2 == s->max)
-			ft_rotate(b, 1);
-		else
-		{
-			ft_rotate(b, 1);
-			ft_swap(b, 1);
-		}
-	}
-	else
-	{
-		if (s->nb2 == s->max)
-			ft_swap(b, 1);
-		else
-		{
-			//ft_putendl("reverse6");
-			ft_reverse_rotate(b, 1);
-		}
-	}
-	//ft_putstr("end\n");
-}
-
-void	ft_sort_top2(t_stack *stack1, t_stack *stack2, int elements)
-{
-	//ft_putstr("sort_top2\n");
-	ft_swap(stack1, 1);
-	if (stack1->name == 'b')
-		while (elements--)
-			ft_push(stack1, stack2, 1);
-	//ft_putstr("end\n");
-}
-
-// Dans A : trie A. 
+// Dans A : trie A 
 // Dans B : trie B en inverse, pour les ‘nb’ valeurs puis si dans B on push les valeurs dans A
 void	ft_sort_top3(t_stack *stack1, t_stack *stack2, t_s *s, int elements)
 {
 	//ft_putstr("sort_top3\n");
 	ft_update_s(stack1, s, elements);
 	if (s->unsorted == 2)
-		ft_sort_top2(stack1, stack2, elements);
+	{
+		ft_swap(stack1, 1);
+		if (stack1->name == 'b')
+			while (elements--)
+				ft_push(stack1, stack2, 1);
+	}
 	else if (elements == stack1->elements && stack1->elements <= 3)
 	{
 		if (stack1->name == 'a')
-			ft_simple_sort_a(stack1, s);
+			ft_sort_only3_a(stack1, s);
 		else
 		{
-			ft_simple_sort_b(stack1, s);
+			ft_sort_only3_b(stack1, s);
 			while (elements--)
 				ft_push(stack1, stack2, 1);
 		}
@@ -268,19 +123,15 @@ void	ft_sort_top3(t_stack *stack1, t_stack *stack2, t_s *s, int elements)
 		else
 		{
 			ft_sort_b(stack2, stack1, s);
-			//printf("elements:%d\n", elements);
 			while (elements-- - 3)
-			{
-				//sleep(1);
 				ft_push(stack1, stack2, 1);
-			}
 		}
 	}
 }
 
 // Dans A : renvoie le nombre de valeurs du sommet de la stack non triées pour A 
 // Dans B : inversement triées parmi les ‘nb’ premieres valeurs
-int	ft_unsorted_top(t_stack *stack, t_s *s, int elements)
+int		ft_unsorted_top(t_stack *stack, t_s *s, int elements)
 {
 	t_list  *rev;
 	t_list  *sorted_copy;
@@ -288,7 +139,6 @@ int	ft_unsorted_top(t_stack *stack, t_s *s, int elements)
 	t_list  *head2;
 	int		i;
 
-	//ft_putstr("unsorted_top\n");
 	head1 = ft_get_sorted_copy(stack->head, s, stack->elements);
 	if (stack->name == 'a')
 		ft_lstrev(&head1);
@@ -305,14 +155,14 @@ int	ft_unsorted_top(t_stack *stack, t_s *s, int elements)
 	}
 	ft_lstdel(&head1, ft_delcontent);
 	ft_lstdel(&head2, ft_delcontent);
+	//ft_printf("unsorted top:%d stack:%c\n", elements - i, stack->name);
 	return (elements - i);
 }
 
 // Dans A : verifie si les nb val de A sont triées. 
 // Dans B : vérifie si les nb val de B sont triées en inverse, si oui on les renvoie dans A.
-int	ft_issorted(t_stack *stack1, t_stack *stack2, int elements)
+int		ft_is_sorted(t_stack *stack1, t_stack *stack2, int elements)
 {
-	//printf("stack1:%c-stack2:%c\n", stack1->name, stack2->name);
 	if (stack1->name == 'a' && ft_lstsorted(stack1->head, elements, ft_ascending_order))
 	{
 		//printf("a sorted\n");
@@ -325,58 +175,44 @@ int	ft_issorted(t_stack *stack1, t_stack *stack2, int elements)
 			ft_push(stack1, stack2, 1);
 		return (1);
 	}
-	//ft_putendl("not sorted");
 	return (0);
 }
 
-void	ft_quicksort_sublist(t_stack *stack1, t_stack *stack2, t_s *s, int elements)
+void	ft_sort_sublist(t_stack *stack1, t_stack *stack2, t_s *s, int elements)
 {
 	int pushed;
 
-	//ft_putchar('\n');
 	//ft_display_stacks(stack1, stack2);
 	//printf(" elements:%d\n", elements);
-	if (ft_issorted(stack1, stack2, elements))
+	if (ft_is_sorted(stack1, stack2, elements))
 	{
 		//ft_putstr("--All sorted\n");
 		return ;
 	}
 	else if ((s->unsorted = ft_unsorted_top(stack1, s, elements)) <= 3)
 	{
-		//ft_putstr("--3 elements or less\n");
+		//ft_putstr("--3 elements unsorted on stack1 or less\n");
+		//ft_printf("--%d elements unsorted on stack %c\n", s->unsorted, stack1->name);
 		ft_sort_top3(stack1, stack2, s, elements);
 	}
 	else
 	{
 		//ft_putstr("--Else\n");
-		pushed = ft_split_half(stack1, stack2, s, elements);
+		pushed = ft_push_half(stack1, stack2, s, elements);
+		//ft_printf("pushed:%d\n", pushed);
 		if (stack1->name == 'a')
 		{
-			//sleep(1);
-			ft_quicksort_sublist(stack1, stack2, s, elements - pushed);
-			ft_quicksort_sublist(stack2, stack1, s, pushed);
+			//ft_putendl("1");
+			ft_sort_sublist(stack1, stack2, s, elements - pushed);
+			//ft_putendl("2");
+			ft_sort_sublist(stack2, stack1, s, pushed);
 		}
 		else
 		{
-			//sleep(1);
-			ft_quicksort_sublist(stack2, stack1, s, pushed);
-			ft_quicksort_sublist(stack1, stack2, s, elements - pushed);
+			//ft_putendl("3");
+			ft_sort_sublist(stack2, stack1, s, pushed);
+			//ft_putendl("4");
+			ft_sort_sublist(stack1, stack2, s, elements - pushed);
 		}
 	}
-}
-
-void	ft_quicksort(t_stack *a, t_stack *b)
-{
-	t_s s;
-
-	s.median = 0;
-	s.max = 0;
-	s.min = 0;
-	s.nb1 = 0;
-	s.nb2 = 0;
-	s.nb3 = 0;
-	s.pushed = 0;
-	s.rotated = 0;
-	s.initial_elements = a->elements;
-	ft_quicksort_sublist(a, b, &s, s.initial_elements);
 }
