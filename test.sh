@@ -1,5 +1,64 @@
 #!/bin/bash
 
+printf "\n======== Basic Test ========\n"
+printf "1. Expect OK         : " ; printf "" | ./checker 1
+printf "2. Expect OK         : " ; printf "" | ./checker -1
+printf "3. Expect OK         : " ; printf "" | ./checker 0
+printf "4. Expect OK         : " ; printf "sa\n" | ./checker 2 1
+printf "5. Expect OK         : " ; printf "" | ./checker 1 2
+printf "6. Expect OK         : " ; printf "" | ./checker -1 1
+printf "7. Expect OK         : " ; printf "pb\npa\n" | ./checker 1
+printf "8. Expect OK         : " ; printf "" | ./checker -2147483648 0 2147483647
+printf "9. Expect OK (*)     : " ; printf "" | ./checker 01 002
+printf "11.Expect OK (*)     : " ; printf "" | ./checker +1 +02
+printf "12.Expect KO         : " ; printf "" | ./checker 2 1
+printf "13.Expect KO         : " ; printf "sa\n" | ./checker 1 2
+printf "14.Expect KO         : " ; printf "pb\n" | ./checker 1
+printf "15.Expect Nothing    : " ; printf "" | ./checker
+
+printf "\n\n======== Error Arg ========\n"
+printf "1. Expect Error      : " ; printf "" | ./checker A
+printf "2. Expect Error (*)  : " ; printf "" | ./checker -
+printf "3. Expect Error      : " ; printf "" | ./checker 0 0
+printf "4. Expect Error      : " ; printf "" | ./checker 1 0 1
+printf "5. Expect Error      : " ; printf "" | ./checker -1 -1
+printf "6. Expect Error      : " ; printf "" | ./checker 2147483648
+printf "7. Expect Error      : " ; printf "" | ./checker -2147483649
+printf "8. Expect Error      : " ; printf "" | ./checker 100000000000000
+printf "9. Expect Error      : " ; printf "" | ./checker 1a
+printf "10.Expect Error      : " ; printf "" | ./checker a0
+printf "11.Expect Error  (*) : " ; printf "" | ./checker "\01"
+printf "12.Expect Error  (*) : " ; printf "" | ./checker "1\01"
+printf "13.Expect Error  (*) : " ; printf "" | ./checker "1\0"
+printf "14.Expect Error      : " ; printf "" | ./checker 1-
+printf "15.Expect Error      : " ; printf "" | ./checker 1+
+
+printf "\n\n======== Error Cmd ========\n"
+printf "1. Expect Error      : " ; printf "sas\n" | ./checker 1 2
+printf "2. Expect Error      : " ; printf "s\n" | ./checker 1 2
+printf "3. Expect Error      : " ; printf "\0\n" | ./checker 1 2
+printf "4. Expect Error      : " ; printf "\0sa\n" | ./checker 1 2
+printf "5. Expect Error  (*) : " ; printf "sa\0\n" | ./checker 1 2
+printf "6. Expect Error      : " ; printf "sas ls\n" | ./checker 1 2
+printf "7. Expect Error      : " ; printf "sas ls\n" | ./checker 1 2
+printf "8. Expect Error      : " ; printf "      ss\n" | ./checker 2 1
+printf "9. Expect Error      : " ; printf "ss      \n" | ./checker 2 1
+printf "10.Expect Error      : " ; printf "      ss      \n" | ./checker 2 1
+printf "11.Expect Error      : " ; printf "\tss\n" | ./checker 2 1
+printf "12.Expect Error      : " ; printf "ss \n" | ./checker 2 1
+printf "13.Expect Error      : " ; printf "rra" | ./checker 2 1
+printf "14.Expect Error      : " ; printf "rra\nrra" | ./checker 1 2
+printf "15.Expect Error      : " ; printf "sa\nrra" | ./checker 1 2
+printf "16.Expect Error      : " ; printf "ra\nrra" | ./checker 1 2
+printf "17.Expect Error      : " ; printf "sa\nrra\nls\n" | ./checker 1 2
+printf "18.Expect Error      : " ; printf "\n" | ./checker 1 2
+printf "19.Expect Error      : " ; printf "ss\nls\n" | ./checker 2 1
+
+printf "\n\n======== Useless Cmd ======\n"
+printf "1. Expect OK         : " ; printf "pa\nsb\nsa\nss\nra\nrb\nrr\nrra\nrrb\nrrr\n" | ./checker 1
+printf "2. Expect OK         : " ; printf "pb\nsb\nsa\nss\nra\nrb\nrr\nrra\nrrb\nrrr\npa\n" | ./checker 1 2
+printf "3. Expect OK         : " ; printf "pb\npb\npa\npa\npa\npa\npa\npa\n" | ./checker 1 2
+
 echo -e '\033[0mTesting validity a Hundred Times in a range from 0 to 4'
 ERR=0
 for i in range {1..99}

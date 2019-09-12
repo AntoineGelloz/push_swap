@@ -6,7 +6,7 @@
 /*   By: agelloz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/11 12:04:47 by agelloz           #+#    #+#             */
-/*   Updated: 2019/08/30 15:27:28 by agelloz          ###   ########.fr       */
+/*   Updated: 2019/09/10 11:10:53 by agelloz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,7 @@ int			fill_line(t_list **file, char ***line, int fd)
 	if ((p = ft_strchr(c->content, '\n')))
 	{
 		**line = (p == c->content) ? ft_strnew(0) : ft_strsub(c->content,
-				0, ft_strlen(c->content) - ft_strlen(p + 1) - 1);
+				0, ft_strlen(c->content) - ft_strlen(p + 1));
 		if (!(**line))
 			return (-1);
 		memmoveclear(&c->content, p + 1);

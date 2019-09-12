@@ -6,7 +6,7 @@
 /*   By: agelloz <agelloz@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/28 17:03:50 by agelloz           #+#    #+#             */
-/*   Updated: 2019/09/05 12:31:44 by agelloz          ###   ########.fr       */
+/*   Updated: 2019/09/10 11:19:53 by agelloz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,10 @@ int		ft_special_values(t_sp *sp, char *ret)
 	if (*ret < '0' || *ret > '9')
 	{
 		sp->output_size = (*ret == '-') ? 4 : 3;
-		sp->right_spaces = (sp->left_align) ? sp->min_width - sp->output_size : 0;
-		sp->left_spaces = (!sp->left_align) ? sp->min_width - sp->output_size : 0;
+		sp->right_spaces = (sp->left_align) ? sp->min_width
+			- sp->output_size : 0;
+		sp->left_spaces = (!sp->left_align) ? sp->min_width
+			- sp->output_size : 0;
 		ft_print_left_spaces(sp);
 		if (*ret == 'n')
 			ft_buffer(sp, "nan", 3);

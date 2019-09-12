@@ -6,13 +6,13 @@
 /*   By: agelloz <agelloz@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/09 14:15:06 by agelloz           #+#    #+#             */
-/*   Updated: 2019/09/09 17:12:49 by agelloz          ###   ########.fr       */
+/*   Updated: 2019/09/10 11:31:24 by agelloz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int	ft_error_exit(t_stack *a)
+int		ft_error_exit(t_stack *a)
 {
 	ft_lstdel(&a->head, ft_delcontent);
 	a->head = NULL;

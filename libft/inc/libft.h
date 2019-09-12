@@ -6,7 +6,7 @@
 /*   By: agelloz <agelloz@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/05 11:20:40 by agelloz           #+#    #+#             */
-/*   Updated: 2019/09/05 14:23:10 by agelloz          ###   ########.fr       */
+/*   Updated: 2019/09/10 11:19:01 by agelloz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,19 +88,22 @@ typedef struct		s_list
 }					t_list;
 
 int					ft_lstcount(t_list *lst);
-int					ft_lstsorted(t_list *list, int size, int (*cmp)(void *, void *));
+int					ft_lstsorted(t_list *list, int size,
+									int (*cmp)(void *, void *));
 int					ft_lstgetmin(t_list *list, int size);
 int					ft_lstgetmax(t_list *list, int size);
 t_list				*ft_lstindex(t_list *list, int index);
 t_list				*ft_lstnew(void const *content, size_t content_size);
 t_list				*ft_lstmap(t_list *lst, t_list *(*f)(t_list *elem));
-t_list				*ft_lstncpy(t_list *source, int size, int (*cpy)(void *, void *));
+t_list				*ft_lstncpy(t_list *source, int size,
+									int (*cpy)(void *, void *));
 t_list				*ft_lstcpy(t_list *source, int (*cpy)(void *, void *));
 t_list				*ft_lstswap(t_list *a, t_list *b);
 void				ft_lstdelone(t_list **alst, void (*del)(void *, size_t));
 void				ft_lstdel(t_list **alst, void (*del)(void *, size_t));
 void				ft_lstiter(t_list *lst, void (*f)(t_list *elem));
-void				ft_lst_mergesort(t_list **source, int (*cmp)(void *, void *));
+void				ft_lst_mergesort(t_list **source,
+										int (*cmp)(void *, void *));
 void				ft_lstrev(t_list **alst);
 void				ft_lstadd(t_list **alst, t_list *new);
 void				ft_lstappend(t_list **alst, t_list *new);
