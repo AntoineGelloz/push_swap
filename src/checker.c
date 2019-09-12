@@ -6,7 +6,7 @@
 /*   By: agelloz <agelloz@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/19 11:33:53 by agelloz           #+#    #+#             */
-/*   Updated: 2019/09/12 15:11:48 by agelloz          ###   ########.fr       */
+/*   Updated: 2019/09/12 16:05:11 by agelloz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,10 +94,13 @@ int		main(int ac, char **av)
 		return (0);
 	if (!ft_fill_a(&a, ac, av, 1))
 		return (ft_error_exit(&a));
-	while ((ret = get_next_line(0, &line)))
+	while ((ret = get_next_line(0, &line)) > 0)
+	{
+		//ft_printf("|%s|\n", line);
 		if (!ft_process_line(&a, &b, line, av[1]))
 			return (0);
-	if (ft_check_stacks(&a, &b))
+	}
+		if (ft_check_stacks(&a, &b))
 		ft_putendl("OK");
 	else
 		ft_putendl("KO");

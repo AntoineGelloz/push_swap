@@ -36,8 +36,6 @@ printf "15.Expect Error      : " ; printf "" | ./checker 1+
 printf "\n\n======== Error Cmd ========\n"
 printf "1. Expect Error      : " ; printf "sas\n" | ./checker 1 2
 printf "2. Expect Error      : " ; printf "s\n" | ./checker 1 2
-printf "3. Expect Error      : " ; printf "\0\n" | ./checker 1 2
-printf "4. Expect Error      : " ; printf "\0sa\n" | ./checker 1 2
 printf "5. Expect Error  (*) : " ; printf "sa\0\n" | ./checker 1 2
 printf "6. Expect Error      : " ; printf "sas ls\n" | ./checker 1 2
 printf "7. Expect Error      : " ; printf "sas ls\n" | ./checker 1 2
