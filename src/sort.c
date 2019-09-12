@@ -6,7 +6,7 @@
 /*   By: agelloz <agelloz@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/19 11:33:53 by agelloz           #+#    #+#             */
-/*   Updated: 2019/09/12 14:32:59 by agelloz          ###   ########.fr       */
+/*   Updated: 2019/09/12 15:49:14 by agelloz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	ft_update_s(t_stack *stack, t_s *s, int elements)
 {
-	ft_printf("update s\n");
+	//ft_printf("update s\n");
 	s->max = ft_lstgetmax(stack->head, s->unsorted);
 	s->min = ft_lstgetmin(stack->head, s->unsorted);
 	s->nb1 = *(int *)stack->head->content;
@@ -39,7 +39,7 @@ t_list	*ft_get_sorted_copy(t_list *list, t_s *s, int elements)
 	while (curr && ++i < index)
 		curr = curr->next;
 	s->median = *(int *)curr->content;
-	printf("median:%d\n", s->median);
+	//printf("median:%d\n", s->median);
 	return (sorted_copy);
 }
 
@@ -65,7 +65,7 @@ int		ft_push_half(t_stack *stack1, t_stack *stack2, t_s *s, int elements)
 	int		limit;
 	int		stack_elements;
 
-	ft_printf("push_half:%d %c->%c\n", stack1->elements, stack1->name, stack2->name);
+	//ft_printf("push_half:%d %c->%c\n", stack1->elements, stack1->name, stack2->name);
 	stack_elements = stack1->elements;
 	sorted_copy = ft_get_sorted_copy(stack1->head, s, elements);
 	if (stack1->name == 'b')
@@ -95,7 +95,7 @@ int		ft_push_half(t_stack *stack1, t_stack *stack2, t_s *s, int elements)
 // Dans B : trie B en inverse, pour les ‘nb’ valeurs puis si dans B on push les valeurs dans A
 void	ft_sort_top3(t_stack *stack1, t_stack *stack2, t_s *s, int elements)
 {
-	ft_printf("sort_top3:%d elements\n", elements);
+	//ft_printf("sort_top3:%d elements\n", elements);
 	ft_update_s(stack1, s, elements);
 	if (s->unsorted == 2)
 	{
@@ -154,7 +154,7 @@ int		ft_unsorted_top(t_stack *stack, t_s *s, int elements)
 	}
 	ft_lstdel(&head1, ft_delcontent);
 	ft_lstdel(&head2, ft_delcontent);
-	ft_printf("unsorted top:%d stack:%c\n", elements - i, stack->name);
+	//ft_printf("unsorted top:%d stack:%c\n", elements - i, stack->name);
 	return (elements - i);
 }
 
@@ -164,12 +164,12 @@ int		ft_is_sorted(t_stack *stack1, t_stack *stack2, int elements)
 {
 	if (stack1->name == 'a' && ft_lstsorted(stack1->head, elements, ft_ascending_order))
 	{
-		printf("a sorted\n");
+		//printf("a sorted\n");
 		return (1);
 	}
 	if (stack1->name == 'b' && ft_lstsorted(stack1->head, elements, ft_descending_order))
 	{
-		printf("b sorted: Push tout de b vers a\n");
+		//printf("b sorted: Push tout de b vers a\n");
 		while (elements--)
 			ft_push(stack1, stack2, 1);
 		return (1);
@@ -181,36 +181,36 @@ void	ft_sort_sublist(t_stack *stack1, t_stack *stack2, t_s *s, int elements)
 {
 	int pushed;
 
-	ft_display_stacks(stack1, stack2);
-	printf("elements:%d\n", elements);
+	//ft_display_stacks(stack1, stack2);
+	//printf("elements:%d\n", elements);
 	if (ft_is_sorted(stack1, stack2, elements))
 	{
-		ft_putstr("--All sorted\n");
+		//ft_putstr("--All sorted\n");
 		return ;
 	}
 	else if ((s->unsorted = ft_unsorted_top(stack1, s, elements)) <= 3)
 	{
-		ft_putstr("--3 elements unsorted on stack1 or less\n");
-		ft_printf("--%d elements unsorted on stack %c\n", s->unsorted, stack1->name);
+		//ft_putstr("--3 elements unsorted on stack1 or less\n");
+		//ft_printf("--%d elements unsorted on stack %c\n", s->unsorted, stack1->name);
 		ft_sort_top3(stack1, stack2, s, elements);
 	}
 	else
 	{
-		ft_putstr("--Else\n");
+		//ft_putstr("--Else\n");
 		pushed = ft_push_half(stack1, stack2, s, elements);
-		ft_printf("pushed:%d\n", pushed);
+		//ft_printf("pushed:%d\n", pushed);
 		if (stack1->name == 'a')
 		{
-			ft_putendl("1");
+			//ft_putendl("1");
 			ft_sort_sublist(stack1, stack2, s, elements - pushed);
-			ft_putendl("2");
+			//ft_putendl("2");
 			ft_sort_sublist(stack2, stack1, s, pushed);
 		}
 		else
 		{
-			ft_putendl("3");
+			//ft_putendl("3");
 			ft_sort_sublist(stack2, stack1, s, pushed);
-			ft_putendl("4");
+			//ft_putendl("4");
 			ft_sort_sublist(stack1, stack2, s, elements - pushed);
 		}
 	}

@@ -58,6 +58,7 @@ printf "\n\n======== Useless Cmd ======\n"
 printf "1. Expect OK         : " ; printf "pa\nsb\nsa\nss\nra\nrb\nrr\nrra\nrrb\nrrr\n" | ./checker 1
 printf "2. Expect OK         : " ; printf "pb\nsb\nsa\nss\nra\nrb\nrr\nrra\nrrb\nrrr\npa\n" | ./checker 1 2
 printf "3. Expect OK         : " ; printf "pb\npb\npa\npa\npa\npa\npa\npa\n" | ./checker 1 2
+printf "\n"
 
 echo -e '\033[0mTesting validity a Hundred Times in a range from 0 to 4'
 ERR=0
