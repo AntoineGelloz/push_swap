@@ -6,39 +6,12 @@
 /*   By: agelloz <agelloz@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/27 17:10:18 by agelloz           #+#    #+#             */
-/*   Updated: 2019/09/05 12:33:55 by agelloz          ###   ########.fr       */
+/*   Updated: 2019/09/16 15:24:27 by agelloz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "printf.h"
 #include "libft.h"
-
-int		ft_atoi(const char *s)
-{
-	int	result;
-	int	negative;
-
-	result = 0;
-	negative = 0;
-	while (*s == '\t' || *s == '\n' || *s == '\v' || *s == '\f'
-			|| *s == '\r' || *s == ' ')
-		s++;
-	if (*s == '+')
-		s++;
-	else if (*s == '-')
-	{
-		negative = 1;
-		s++;
-	}
-	while (*s >= '0' && *s <= '9')
-	{
-		result = result * 10 + *s - '0';
-		s++;
-	}
-	if (negative)
-		result = -result;
-	return (result);
-}
 
 void	ft_parse_flags(const char *format, int *i, t_sp *sp)
 {

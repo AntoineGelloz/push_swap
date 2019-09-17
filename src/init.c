@@ -6,7 +6,7 @@
 /*   By: agelloz <agelloz@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/19 11:33:53 by agelloz           #+#    #+#             */
-/*   Updated: 2019/09/12 14:53:51 by agelloz          ###   ########.fr       */
+/*   Updated: 2019/09/16 15:58:40 by agelloz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ int		ft_fill_a(t_stack *a, int ac, char **av, int checker)
 	{
 		if (!ft_check_n(av, i))
 		{
-			ft_putendl("Error");
+			ft_putendl_fd("Error", STDERR_FILENO);
 			return (0);
 		}
 		num = ft_atoi(av[i]);

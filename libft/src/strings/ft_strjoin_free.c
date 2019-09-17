@@ -6,7 +6,7 @@
 /*   By: agelloz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/02 15:55:28 by agelloz           #+#    #+#             */
-/*   Updated: 2019/04/24 17:26:51 by agelloz          ###   ########.fr       */
+/*   Updated: 2019/09/14 21:49:10 by agelloz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 
 #include "libft.h"
 
-char	*ft_strjoinfree(char *s1, char const *s2)
+char	*ft_strjoin_free(char *s1, char const *s2)
 {
 	char *result;
 

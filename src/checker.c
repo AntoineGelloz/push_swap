@@ -6,7 +6,7 @@
 /*   By: agelloz <agelloz@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/19 11:33:53 by agelloz           #+#    #+#             */
-/*   Updated: 2019/09/12 16:05:11 by agelloz          ###   ########.fr       */
+/*   Updated: 2019/09/16 15:56:14 by agelloz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ int		ft_check_line(char *line)
 			&& ft_strcmp(line, "rra\n") && ft_strcmp(line, "rrb\n")
 			&& ft_strcmp(line, "rrr\n"))
 	{
-		ft_putendl("Error");
+		ft_putendl_fd("Error", STDERR_FILENO);
 		return (0);
 	}
 	return (1);
@@ -60,21 +60,22 @@ void	ft_exec_instruction(char *line, t_stack *a, t_stack *b, int print_mode)
 	(!ft_strcmp(line, "rrr\n")) ? ft_rreverse_rotate(a, b, print_mode) : 0;
 }
 
-int		ft_process_line(t_stack *a, t_stack *b, char *line, char *av1)
+int		ft_process_line(t_stack *a, t_stack *b, char **line, char *av1)
 {
-	if (line && !ft_check_line(line))
+	if (*line && !ft_check_line(*line))
 	{
 		ft_delete_stacks(a, b);
-		ft_strdel(&line);
+		ft_strdel(line);
 		return (0);
 	}
 	if (ft_strequ(av1, "-v"))
 	{
-		ft_exec_instruction(line, a, b, 1);
+		ft_exec_instruction(*line, a, b, 1);
 		ft_display_stacks(a, b);
 	}
 	else
-		ft_exec_instruction(line, a, b, 0);
+		ft_exec_instruction(*line, a, b, 0);
+	ft_strdel(line);
 	return (1);
 }
 
@@ -94,13 +95,10 @@ int		main(int ac, char **av)
 		return (0);
 	if (!ft_fill_a(&a, ac, av, 1))
 		return (ft_error_exit(&a));
-	while ((ret = get_next_line(0, &line)) > 0)
-	{
-		//ft_printf("|%s|\n", line);
-		if (!ft_process_line(&a, &b, line, av[1]))
+	while ((ret = ft_get_next_line(0, &line)) > 0)
+		if (!ft_process_line(&a, &b, &line, av[1]))
 			return (0);
-	}
-		if (ft_check_stacks(&a, &b))
+	if (ft_check_stacks(&a, &b))
 		ft_putendl("OK");
 	else
 		ft_putendl("KO");

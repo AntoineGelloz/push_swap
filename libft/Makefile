@@ -6,13 +6,14 @@
 #    By: agelloz <agelloz@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/09/05 10:17:32 by agelloz           #+#    #+#              #
-#    Updated: 2019/09/05 14:42:25 by agelloz          ###   ########.fr        #
+#    Updated: 2019/09/16 15:38:24 by agelloz          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = libft.a
 CC = Clang
 CFLAGS = -Wall -Werror -Wextra
+#CFLAGS = -Wall -Werror -Wextra -fsanitize=address,undefined -g3
 CLEANUP = /bin/rm -rf
 INC = libft.h
 INC_DIR = inc/
@@ -72,7 +73,7 @@ SRC += ft_strequ.c
 SRC += ft_striter.c
 SRC += ft_striteri.c
 SRC += ft_strjoin.c
-SRC += ft_strjoinfree.c
+SRC += ft_strjoin_free.c
 SRC += ft_strlcat.c
 SRC += ft_strlen.c
 SRC += ft_strmap.c
@@ -91,8 +92,9 @@ SRC += ft_strtrim.c
 SRC += ft_tolower.c
 SRC += ft_toupper.c
 SRC += ft_atoi.c
+SRC += ft_atol.c
 SRC += ft_itoa.c
-SRC += get_next_line.c
+SRC += ft_get_next_line.c
 SRC += ft_putchar.c
 SRC += ft_putchar_fd.c
 SRC += ft_putendl.c
@@ -126,8 +128,7 @@ OBJ = $(patsubst %.c, $(OBJ_DIR)%.o, $(SRC))
 all: $(OBJ_DIR) $(NAME)
 
 $(NAME): $(OBJ)
-	ar -rusc $@ $^
-	ranlib $@
+	ar -rsc $@ $^
 	printf "$(GREEN)created: $@\n$(NC)"
 
 $(OBJ): $(OBJ_DIR)%.o : %.c $(INC)

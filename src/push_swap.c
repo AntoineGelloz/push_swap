@@ -6,7 +6,7 @@
 /*   By: agelloz <agelloz@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/19 11:33:53 by agelloz           #+#    #+#             */
-/*   Updated: 2019/09/09 17:12:09 by agelloz          ###   ########.fr       */
+/*   Updated: 2019/09/14 20:06:43 by agelloz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ int		main(int ac, char **av)
 	b.name = 'b';
 	a.elements = 0;
 	b.elements = 0;
-	if (ac <= 2)
+	if (ac == 1)
 		return (0);
 	if (!ft_fill_a(&a, ac, av, 0))
 		return (ft_error_exit(&a));

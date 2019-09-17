@@ -6,7 +6,7 @@
 /*   By: agelloz <agelloz@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/19 11:33:53 by agelloz           #+#    #+#             */
-/*   Updated: 2019/09/09 14:25:53 by agelloz          ###   ########.fr       */
+/*   Updated: 2019/09/10 11:52:39 by agelloz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,6 @@ void	ft_sort_b_2(t_stack *a, t_stack *b, t_s *s)
 
 void	ft_sort_b(t_stack *a, t_stack *b, t_s *s)
 {
-	//ft_putstr("sort b\n");
 	if (s->nb1 == s->max)
 	{
 		ft_push(b, a, 1);
@@ -57,7 +56,6 @@ void	ft_sort_b(t_stack *a, t_stack *b, t_s *s)
 
 void	ft_sort_only3_b(t_stack *b, t_s *s)
 {
-	//ft_putstr("sort_only3_b\n");
 	if (s->nb1 == s->max)
 	{
 		ft_reverse_rotate(b, 1);

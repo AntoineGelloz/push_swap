@@ -6,7 +6,7 @@
 /*   By: agelloz <agelloz@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/05 11:20:40 by agelloz           #+#    #+#             */
-/*   Updated: 2019/09/10 11:19:01 by agelloz          ###   ########.fr       */
+/*   Updated: 2019/09/16 15:31:12 by agelloz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,11 +58,12 @@ int					ft_strequ(char const *s1, char const *s2);
 int					ft_strnequ(char const *s1, char const *s2, size_t n);
 char				*ft_strsub(char const *s, unsigned intstart, size_t len);
 char				*ft_strjoin(char const *s1, char const *s2);
-char				*ft_strjoinfree(char *s1, char const *s2);
+char				*ft_strjoin_free(char *s1, char const *s2);
 char				*ft_strtrim(char const *s);
 char				**ft_strsplit(char const *s, char c);
 char				*ft_itoa(int n);
 int					ft_atoi(const char *str);
+long long			ft_atol(const char *str);
 int					ft_isalpha(int c);
 int					ft_isdigit(int c);
 int					ft_isalnum(int c);
@@ -78,7 +79,7 @@ void				ft_putchar_fd(char c, int fd);
 void				ft_putstr_fd(char const *s, int fd);
 void				ft_putendl_fd(char const *s, int fd);
 void				ft_putnbr_fd(int n, int fd);
-int					get_next_line(const int fd, char **line);
+int					ft_get_next_line(const int fd, char **line);
 
 typedef struct		s_list
 {
@@ -86,6 +87,12 @@ typedef struct		s_list
 	size_t			content_size;
 	struct s_list	*next;
 }					t_list;
+
+typedef struct		s_file
+{
+	char			*rest;
+	int				fd;
+}					t_file;
 
 int					ft_lstcount(t_list *lst);
 int					ft_lstsorted(t_list *list, int size,
